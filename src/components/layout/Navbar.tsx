@@ -112,7 +112,8 @@ const Navbar = ({
             {/* Register - Gradient */}
             <Button
               asChild
-              className="bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-md"
+              variant="outline"
+              className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
             >
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>
@@ -155,10 +156,18 @@ const Navbar = ({
 
                   <div className="flex flex-col gap-3">
                     <ModeToggle />
-                    <Button asChild variant="outline">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                    >
                       <a href={auth.login.url}>{auth.login.title}</a>
                     </Button>
-                    <Button asChild>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                    >
                       <a href={auth.signup.url}>{auth.signup.title}</a>
                     </Button>
                   </div>

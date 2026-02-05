@@ -1,34 +1,32 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { MealPost } from "@/types";
+import { ShoppingCart } from "lucide-react";
+import Image from "next/image";
 
-export function FoodCard() {
+export function FoodCard({ meal }: { meal: MealPost }) {
+  const { title, price, imageUrl } = meal;
+
   return (
     <Card className="w-full max-w-sm overflow-hidden transition-all hover:shadow-lg">
-      <div className="relative h-48 w-full overflow-hidden"></div>
+      <div className="relative h-48 w-full overflow-hidden">
+        {imageUrl && (
+          <Image src={imageUrl} alt={title} fill className="object-cover" />
+        )}
+      </div>
 
       <CardHeader>
-        <CardTitle className="text-2xl">Delicious Pizza</CardTitle>
-        <p className="text-sm text-muted-foreground mt-2">
-          Fresh mozzarella, tomatoes, and basil on a crispy crust
-        </p>
+        <CardTitle className="text-2xl">{title}</CardTitle>
       </CardHeader>
 
-      <CardContent>
-        <div className="text-3xl font-bold text-primary">$12.99</div>
-      </CardContent>
-
-      <CardFooter>
+      <CardFooter className="flex items-center justify-between gap-4">
+        <div className="text-3xl font-bold text-primary">{price}</div>
         <Button
-          className="w-full bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-md"
+          variant="outline"
+          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95"
           size="lg"
         >
-          Add to Cart
+          <ShoppingCart className="w-5 h-5 text-orange-500 dark:text-orange-700" />
         </Button>
       </CardFooter>
     </Card>

@@ -1,4 +1,4 @@
-const aboutPage = () => {
+const aboutPage = async () => {
   return (
     <div>
       <h1 className="text-3xl font-bold">About Us</h1>

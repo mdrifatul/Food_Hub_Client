@@ -1,37 +1,53 @@
+import { mealService } from "@/components/services/meal.service";
 import { FoodCard } from "@/components/ui/food-card";
+import { MealPost } from "@/types";
+import { MealsSectionProps } from "./../../../app/(commonLayout)/page";
+import MealsFilters from "./meals-filters";
 
-export default function MealsSection() {
-  const meals = [
-    {
-      id: 1,
-      title: "Delicious Pizza",
-      description: "Fresh mozzarella, tomatoes, and basil on a crispy crust",
-      price: 12.99,
-    },
-    {
-      id: 2,
-      title: "Classic Burger",
-      description: "Juicy beef patty with fresh lettuce and tomato",
-      price: 9.99,
-    },
-    {
-      id: 3,
-      title: "Grilled Chicken",
-      description: "Tender grilled chicken breast with seasonal vegetables",
-      price: 14.99,
-    },
-    {
-      id: 4,
-      title: "Pasta Carbonara",
-      description: "Creamy sauce with bacon and parmesan cheese",
-      price: 11.99,
-    },
-  ];
+export default async function MealsSection({
+  searchParams,
+}: MealsSectionProps) {
+  const { data: allMeals } = await mealService.getmealPost();
+
+  const cuisines = Array.from(
+    new Set(allMeals.map((meal: MealPost) => meal.cuisine).filter(Boolean)),
+  ) as string[];
+  const dietaryOptions = Array.from(
+    new Set(
+      allMeals.flatMap((meal: MealPost) => meal.dietaryPreferences || []),
+    ),
+  ) as string[];
+
+  const priceRanges: Record<string, [number, number]> = {
+    "0-100": [0, 100],
+    "101-500": [101, 500],
+    "501-1000": [501, 1000],
+    "1001+": [1001, 5000],
+  };
+
+  const selectedPriceRange = searchParams?.price
+    ? priceRanges[searchParams.price]
+    : null;
+
+  const filteredMeals = allMeals.filter((meal: MealPost) => {
+    const cuisineMatch =
+      !searchParams?.cuisine || meal.cuisine === searchParams.cuisine;
+
+    const dietaryMatch =
+      !searchParams?.dietaryPreferences ||
+      meal.dietaryPreferences?.includes(searchParams.dietaryPreferences);
+
+    const priceMatch =
+      !selectedPriceRange ||
+      (meal.price >= selectedPriceRange[0] &&
+        meal.price <= selectedPriceRange[1]);
+
+    return cuisineMatch && dietaryMatch && priceMatch;
+  });
 
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">Our Menu</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -40,14 +56,29 @@ export default function MealsSection() {
           </p>
         </div>
 
-        {/* Meals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {meals.map((meal) => (
-            <div key={meal.id} className="flex justify-center">
-              <FoodCard />
-            </div>
-          ))}
-        </div>
+        <MealsFilters
+          cuisines={cuisines}
+          dietaryOptions={dietaryOptions}
+          selectedCuisine={searchParams?.cuisine}
+          selectedDietary={searchParams?.dietaryPreferences}
+          selectedPrice={searchParams?.price}
+        />
+
+        {filteredMeals.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredMeals.map((meal: MealPost) => (
+              <div key={meal.id} className="flex justify-center">
+                <FoodCard meal={meal} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground text-lg">
+              No meals match your filter criteria. Try adjusting your filters.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
