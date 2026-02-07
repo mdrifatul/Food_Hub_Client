@@ -8,7 +8,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { userService } from "@/services/user.service";
 import { User } from "@/types";
-import { Calendar, Mail, MapPin, Phone, Shield, User as UserIcon } from "lucide-react";
+import {
+  Calendar,
+  Mail,
+  MapPin,
+  Phone,
+  Shield,
+  User as UserIcon,
+} from "lucide-react";
 
 const UserDashboard = async () => {
   const { data } = await userService.getSession();
@@ -58,74 +65,91 @@ const UserDashboard = async () => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-6 md:grid-cols-2">
-            
             <div className="flex items-start gap-3">
               <div className="mt-1 rounded-lg bg-primary/10 p-2">
                 <Mail className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-medium text-muted-foreground">Email Address</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Email Address
+                </p>
                 <p className="text-sm font-semibold">{user.email}</p>
               </div>
             </div>
 
-           
             <div className="flex items-start gap-3">
               <div className="mt-1 rounded-lg bg-primary/10 p-2">
                 <Phone className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-medium text-muted-foreground">Phone Number</p>
-                <p className="text-sm font-semibold">{user.phone || "Not provided"}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Phone Number
+                </p>
+                <p className="text-sm font-semibold">
+                  {user.phone || "Not provided"}
+                </p>
               </div>
             </div>
 
-          
             <div className="flex items-start gap-3">
               <div className="mt-1 rounded-lg bg-primary/10 p-2">
                 <MapPin className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-medium text-muted-foreground">Address</p>
-                <p className="text-sm font-semibold">{user.address || "Not provided"}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Address
+                </p>
+                <p className="text-sm font-semibold">
+                  {user.address || "Not provided"}
+                </p>
               </div>
             </div>
 
-           
             <div className="flex items-start gap-3">
               <div className="mt-1 rounded-lg bg-primary/10 p-2">
                 <Calendar className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-medium text-muted-foreground">Member Since</p>
-                <p className="text-sm font-semibold">{formatDate(user.createdAt)}</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  Member Since
+                </p>
+                <p className="text-sm font-semibold">
+                  {formatDate(user.createdAt)}
+                </p>
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      
       <Card>
         <CardHeader>
           <CardTitle>Account Details</CardTitle>
-          <CardDescription>Your account information and settings</CardDescription>
+          <CardDescription>
+            Your account information and settings
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="flex justify-between items-center py-2">
               <span className="text-sm font-medium">User ID</span>
-              <span className="text-sm text-muted-foreground font-mono">{user.id}</span>
+              <span className="text-sm text-muted-foreground font-mono">
+                {user.id}
+              </span>
             </div>
             <Separator />
             <div className="flex justify-between items-center py-2">
               <span className="text-sm font-medium">Account Type</span>
-              <span className="text-sm text-muted-foreground capitalize">{user.role}</span>
+              <span className="text-sm text-muted-foreground capitalize">
+                {user.role}
+              </span>
             </div>
             <Separator />
             <div className="flex justify-between items-center py-2">
               <span className="text-sm font-medium">Last Updated</span>
-              <span className="text-sm text-muted-foreground">{formatDate(user.updatedAt)}</span>
+              <span className="text-sm text-muted-foreground">
+                {formatDate(user.updatedAt)}
+              </span>
             </div>
           </div>
         </CardContent>

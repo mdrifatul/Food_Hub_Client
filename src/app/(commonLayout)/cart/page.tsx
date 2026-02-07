@@ -60,7 +60,7 @@ export default function CartPage() {
             <span>${totalPrice.toFixed(2)}</span>
           </div>
           <Button className="float-right bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
-            <Link href="/checkout">Proceed to Checkout</Link>
+            <Link href="/order">Proceed to Checkout</Link>
           </Button>
         </div>
       </div>
