@@ -1,6 +1,6 @@
-import { mealService } from "@/components/services/meal.service";
 import { FoodCard } from "@/components/ui/food-card";
 import { MealPost } from "@/types";
+import { mealService } from "../../../services/meal.service";
 import { MealsSectionProps } from "./../../../app/(commonLayout)/page";
 import MealsFilters from "./meals-filters";
 

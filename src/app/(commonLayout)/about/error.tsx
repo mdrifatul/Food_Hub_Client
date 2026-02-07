@@ -12,7 +12,6 @@ export default function AboutError({
   reset: () => void;
 }) {
   useEffect(() => {
-    //* We can pass this error to a logger
     console.error(error);
   }, [error]);
 

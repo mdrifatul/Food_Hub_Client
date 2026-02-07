@@ -23,16 +23,17 @@ export const mealService = {
           }
         });
       }
-      const config: RequestInit = {
-        cache: "no-store",
-      };
 
-      if (options?.cache) {
-        config.cache = options.cache;
-      }
-      if (options?.revalidate) {
-        config.next = { revalidate: options.revalidate };
-      }
+      const config: RequestInit & {
+        next?: { revalidate?: 10 };
+      } = {};
+
+      // if (options?.cache) {
+      //   config.cache = options.cache;
+      // }
+      // if (options?.revalidate) {
+      //   config.next = { revalidate: options.revalidate };
+      // }
 
       const res = await fetch(url.toString(), config);
 

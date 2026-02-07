@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { LogOut, Menu, Settings, ShoppingCart, User } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { authClient } from "@/lib/auth-client";
+import { useCart } from "@/lib/user-cart";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ModeToggle } from "./ModeToggle";
 
 interface MenuItem {
@@ -51,6 +65,8 @@ interface Navbar1Props {
       url: string;
     };
   };
+  isLoggedIn?: boolean;
+  userName?: string;
 }
 
 const Navbar = ({
@@ -76,7 +92,18 @@ const Navbar = ({
     signup: { title: "Register", url: "/register" },
   },
   className,
+  isLoggedIn = false,
+  userName,
 }: Navbar1Props) => {
+  const router = useRouter();
+
+  const { totalItems } = useCart();
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    router.refresh();
+  };
+
   return (
     <section className={cn("py-4 dark:bg-gray-950", className)}>
       <div className="w-11/12 mx-auto">
@@ -98,25 +125,79 @@ const Navbar = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <ModeToggle />
 
-            <Button
-              asChild
-              variant="outline"
-              className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
-            >
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 relative"
+                  asChild
+                >
+                  <Link href="/cart">
+                    <ShoppingCart className="h-5 w-5" />
+                    {totalItems > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-lg">
+                        {totalItems > 99 ? "99+" : totalItems}
+                      </span>
+                    )}
+                  </Link>
+                </Button>
 
-            {/* Register - Gradient */}
-            <Button
-              asChild
-              variant="outline"
-              className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
-            >
-              <a href={auth.signup.url}>{auth.signup.title}</a>
-            </Button>
+                {/* Profile Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95"
+                    >
+                      <User className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>
+                      {userName ? `${userName}` : "My Account"}
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard" className="cursor-pointer">
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleLogout}
+                      className="cursor-pointer text-red-600 focus:text-red-600"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Logout</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                >
+                  <a href={auth.login.url}>{auth.login.title}</a>
+                </Button>
+
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                >
+                  <a href={auth.signup.url}>{auth.signup.title}</a>
+                </Button>
+              </>
+            )}
           </div>
         </nav>
 
@@ -156,20 +237,64 @@ const Navbar = ({
 
                   <div className="flex flex-col gap-3">
                     <ModeToggle />
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
-                    >
-                      <a href={auth.login.url}>{auth.login.title}</a>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
-                    >
-                      <a href={auth.signup.url}>{auth.signup.title}</a>
-                    </Button>
+
+                    {isLoggedIn ? (
+                      <>
+                        <Button
+                          variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 relative w-full justify-start"
+                          asChild
+                        >
+                          <Link href="/cart">
+                            <ShoppingCart className="h-5 w-5 mr-2" />
+                            Cart
+                            {totalItems > 0 && (
+                              <span className="ml-auto bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                {totalItems > 99 ? "99+" : totalItems}
+                              </span>
+                            )}
+                          </Link>
+                        </Button>
+
+                        <Button
+                          variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
+                          asChild
+                        >
+                          <Link href="/dashboard">
+                            <Settings className="h-5 w-5 mr-2" />
+                            Dashboard
+                          </Link>
+                        </Button>
+
+                        <Button
+                          onClick={handleLogout}
+                          variant="outline"
+                          className="border-red-500 text-red-500 hover:bg-red-50 dark:border-red-600 dark:text-red-400 dark:hover:bg-red-950/50 w-full justify-start"
+                        >
+                          <LogOut className="h-5 w-5 mr-2" />
+                          Logout
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                        >
+                          <a href={auth.login.url}>{auth.login.title}</a>
+                        </Button>
+
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                        >
+                          <a href={auth.signup.url}>{auth.signup.title}</a>
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </SheetContent>
