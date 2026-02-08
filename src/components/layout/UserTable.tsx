@@ -13,11 +13,7 @@ interface User {
   createdAt?: string;
 }
 
-interface UserTableProps {
-  users: User[];
-}
-
-export const UserTable = ({ users }: UserTableProps) => {
+export const UserTable = ({ users }: { users: User[] }) => {
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
 
   const handleStatusChange = async (userId: string, status: string) => {
