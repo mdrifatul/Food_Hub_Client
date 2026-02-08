@@ -5,7 +5,6 @@ const AllOrders = async () => {
   const { data: orders } = await getOrder();
   
   const orderList = orders?.data || []
-    console.log(orderList)
   return (
     <div className="p-6">
       <div className="mb-6">
