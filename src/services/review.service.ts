@@ -16,6 +16,9 @@ export const reviewService = {
         },
         body: JSON.stringify(review),
       });
+      if(!res.ok){
+        throw new Error("Failed to create review");
+      }
       const data = res.json();
       return { data: data, error: null };
     } catch (err) {

@@ -9,3 +9,12 @@ export interface MealPost {
   imageUrl: string | null;
   isAvailable: boolean;
 }
+
+export interface createMeal {
+  title: string;
+  price: number;
+  cuisine: string;
+  dietaryPreferences?: string[];
+  imageUrl?: string | null;
+  isAvailable?: boolean;
+}

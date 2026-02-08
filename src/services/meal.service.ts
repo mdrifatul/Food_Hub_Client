@@ -1,5 +1,6 @@
 import { MealsSectionProps } from "@/app/(commonLayout)/page";
 import { env } from "@/env";
+import { createMeal } from "@/types";
 
 const API_URL = env.API_URL;
 
@@ -42,6 +43,29 @@ export const mealService = {
       return { data: data, error: null };
     } catch (err) {
       return { data: null, error: "something went wrong" };
+    }
+  },
+
+  createMeal: async function (mealData: createMeal) {
+    try {
+      const res = await fetch("/api/meals", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mealData),
+      });
+
+      const data = await res.json();
+      if(!res.ok){
+        throw new Error("Failed to create meal");
+      }
+      return { data: data, error: null };
+    } catch (err) {
+      return {
+        data: null,
+        error: err instanceof Error ? err.message : "Failed to create meal",
+      };
     }
   },
 };

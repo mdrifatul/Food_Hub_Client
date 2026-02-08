@@ -94,7 +94,6 @@ const Navbar = ({
   const router = useRouter();
 
   const { totalItems } = useCart();
-
   const handleLogout = async () => {
     await authClient.signOut();
     router.refresh();
@@ -103,10 +102,10 @@ const Navbar = ({
   return (
     <section className={cn("py-4 dark:bg-gray-950", className)}>
       <div className="w-11/12 mx-auto">
-        {/* Desktop Menu */}
+
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
-            {/* Logo */}
+
             <a href={logo.url} className="flex items-center gap-2">
               <span className="text-2xl font-semibold tracking-tighter text-orange-600">
                 {logo.title}
@@ -142,7 +141,7 @@ const Navbar = ({
                   </Link>
                 </Button>
 
-                {/* Profile Dropdown */}
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button

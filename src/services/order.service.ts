@@ -16,8 +16,13 @@ export const orderService = {
         },
         body: JSON.stringify(orderData),
       });
+      if(!res.ok){
+        throw new Error("Failed to create order");
+      }
       const data = await res.json();
-
+      if(!data){
+        throw new Error("Failed to create order");
+      }
       return { data: data, error: null };
     } catch (err) {
       return { data: null, error: "something went wrong" };
@@ -33,8 +38,11 @@ export const orderService = {
           Cookie: cookiesStore.toString(),
         },
       });
-
       const data = await res.json();
+
+      if(!res.ok){
+        throw new Error("Failed to get orders");
+      }
 
       return { data: data, error: null };
     } catch (err) {
