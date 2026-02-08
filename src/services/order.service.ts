@@ -16,28 +16,29 @@ export const orderService = {
         },
         body: JSON.stringify(orderData),
       });
-      const data = res.json();
-      return { data: data, error: "something went wrong" };
+      const data = await res.json();
+
+      return { data: data, error: null };
     } catch (err) {
       return { data: null, error: "something went wrong" };
     }
   },
 
-//   getAllOrder: async function () {
-//     try {
-//       const cookiesStore = await cookies();
-//       const res = await fetch(`${API_URL}/orders`, {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Cookie: cookiesStore.toString(),
-//         },
-//       });
+  getAllOrder: async function () {
+    try {
+      const cookiesStore = await cookies();
+      const res = await fetch(`${API_URL}/orders`, {
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookiesStore.toString(),
+        },
+      });
 
-//       const data = await res.json();
+      const data = await res.json();
 
-//       return { data: data, error: null };
-//     } catch (err) {
-//       return { data: null, error: "something went wrong" };
-//     }
-//   },
-// };
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "something went wrong" };
+    }
+  },
+};

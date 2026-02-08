@@ -8,7 +8,7 @@ export const postOrder = async (data: orderMeal) => {
   return res;
 };
 
-// export const getOrder = async () => {
-//   const res = await orderService.getAllOrder();
-//   return res;
-// };
+export const getOrder = async () => {
+  const res = await orderService.getAllOrder();
+  return res;
+};

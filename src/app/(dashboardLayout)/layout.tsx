@@ -1,9 +1,12 @@
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Roles } from "@/contants/roles";
 import { userService } from "@/services/user.service";
-
 
 export default async function DashboardLayout({
   admin,
@@ -29,7 +32,9 @@ export default async function DashboardLayout({
   };
   return (
     <SidebarProvider>
-      <AppSidebar collapsible="none" user={userInfo} />
+      <div className="">
+        <AppSidebar collapsible="none" user={userInfo} />
+      </div>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -38,7 +43,8 @@ export default async function DashboardLayout({
             className="mr-2 data-[orientation=vertical]:h-4"
           />
         </header>
-        {renderContent()}</SidebarInset>
+        {renderContent()}
+      </SidebarInset>
     </SidebarProvider>
   );
 }

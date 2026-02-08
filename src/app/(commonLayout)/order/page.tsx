@@ -9,20 +9,12 @@ import { useCart } from "@/lib/user-cart";
 import { useForm } from "@tanstack/react-form";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-interface CustomerInfo {
-  fullName: string;
-  email: string;
-  phone: string;
-  specialInstructions?: string;
-}
-
 export default function OrderPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { items, totalPrice, clearCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,9 +32,7 @@ export default function OrderPage() {
             quantity: item.quantity,
           })),
         };
-
         const result = await postOrder(orderData);
-
         if (result?.error) {
           toast.error(result.error);
           setIsLoading(false);
@@ -52,7 +42,7 @@ export default function OrderPage() {
         clearCart();
 
         toast.success("Order placed successfully!");
-        router.push("/");
+        router.push("/dashboard/orders");
       } catch (error) {
         toast.error("Failed to place order");
         setIsLoading(false);
@@ -176,7 +166,6 @@ export default function OrderPage() {
               </Card>
             </div>
 
-            {/* Summary Sidebar */}
             <div className="lg:col-span-1">
               <Card className="p-6 sticky top-20">
                 <h3 className="text-xl font-semibold mb-4">Order Summary</h3>

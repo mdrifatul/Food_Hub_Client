@@ -21,7 +21,7 @@ export function FoodCard({ meal }: { meal: MealPost }) {
   };
 
   return (
-    <Card className="w-full max-w-sm overflow-hidden transition-all hover:shadow-lg">
+    <Card className="w-full max-w-sm overflow-hidden transition-all hover:shadow-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 ">
       <div className="relative h-48 w-full overflow-hidden">
         {imageUrl && (
           <Image src={imageUrl} alt={title} fill className="object-cover" />

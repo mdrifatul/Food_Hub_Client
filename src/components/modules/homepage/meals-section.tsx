@@ -46,7 +46,7 @@ export default async function MealsSection({
   });
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-16 border-gray-200 dark:bg-gray-950">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">Our Menu</h2>
