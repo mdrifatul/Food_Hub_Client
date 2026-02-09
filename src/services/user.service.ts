@@ -11,7 +11,7 @@ export const userService = {
         },
         cache: "no-store",
       });
-      
+
       const session = await res.json();
       if (session === null) {
         return { data: null, error: { message: "something went wrong" } };
@@ -22,20 +22,20 @@ export const userService = {
     }
   },
 
-  getAllUser : async function () {
-  const cookieStor = await cookies();
-  const res = await fetch(`${env.API_URL}/users`, {
-    headers: {
-      Cookie: cookieStor.toString(),
-    },
-    cache: "no-store",
-  });
+  getAllUser: async function () {
+    const cookieStor = await cookies();
+    const res = await fetch(`${env.API_URL}/users`, {
+      headers: {
+        Cookie: cookieStor.toString(),
+      },
+      cache: "no-store",
+    });
 
-  const users = await res.json();
-  return { data: users, error: null };
+    const users = await res.json();
+    return { data: users, error: null };
   },
 
-  updateUserStatus: async function (id: string, status: string) {
+  updateUserStatus: async function (id: string, status?: string) {
     try {
       const cookieStor = await cookies();
       const res = await fetch(`${env.API_URL}/users/${id}`, {
@@ -49,7 +49,10 @@ export const userService = {
       });
 
       if (!res.ok) {
-        return { data: null, error: { message: "Failed to update user status" } };
+        return {
+          data: null,
+          error: { message: "Failed to update user status" },
+        };
       }
 
       const data = await res.json();
@@ -58,6 +61,47 @@ export const userService = {
       return { data: null, error: { message: "something went wrong" } };
     }
   },
+
+  updateUserRole: async function (id: string, role?: string) {
+    try {
+      const cookieStor = await cookies();
+      const res = await fetch(`${env.API_URL}/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStor.toString(),
+        },
+        body: JSON.stringify({ role }),
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error("Update user role failed:", {
+          status: res.status,
+          statusText: res.statusText,
+          error: errorData,
+        });
+        return {
+          data: null,
+          error: {
+            message:
+              errorData?.message ||
+              `Failed to update user role (${res.status})`,
+          },
+        };
+      }
+
+      const data = await res.json();
+      return { data, error: null };
+    } catch (err) {
+      console.error("Update user role error:", err);
+      return {
+        data: null,
+        error: {
+          message: err instanceof Error ? err.message : "Something went wrong",
+        },
+      };
+    }
+  },
 };
-
-

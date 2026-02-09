@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Menu, Settings, ShoppingCart, User } from "lucide-react";
+import { LogOut, Menu, Settings, ShoppingCart, Store, User } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -92,6 +92,7 @@ const Navbar = ({
   userName,
 }: Navbar1Props) => {
   const router = useRouter();
+  
 
   const { totalItems } = useCart();
   const handleLogout = async () => {
@@ -164,6 +165,13 @@ const Navbar = ({
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                    >
+                      <Link className="cursor-pointer text-orange-600 flex" href="/providerForm">
+                        <Store className="mr-4 h-4 w-4" />
+                        <span>Provider Account</span>
+                      </Link>
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={handleLogout}
                       className="cursor-pointer text-red-600 focus:text-red-600"
@@ -260,6 +268,15 @@ const Navbar = ({
                             <Settings className="h-5 w-5 mr-2" />
                             Dashboard
                           </Link>
+                        </Button>
+                        <Button 
+                        variant="outline"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
+                          asChild>
+                          <Link className="cursor-pointer text-orange-600 flex" href="/providerForm">
+                        <Store className="mr-4 h-4 w-4" />
+                        <span>Provider Account</span>
+                      </Link>
                         </Button>
 
                         <Button
