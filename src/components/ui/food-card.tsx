@@ -33,7 +33,7 @@ export function FoodCard({ meal }: { meal: MealPost }) {
       </CardHeader>
 
       <CardFooter className="flex items-center justify-between gap-4">
-        <div className="text-3xl font-bold text-primary">{price}</div>
+        <div className="text-3xl font-bold text-primary">$ {price}</div>
         <Button
           onClick={handleAddToCart}
           variant="outline"

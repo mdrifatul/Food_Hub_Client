@@ -1,13 +1,13 @@
+import { getAllMeals } from "@/action/meal.action";
 import { FoodCard } from "@/components/ui/food-card";
 import { MealPost } from "@/types";
-import { mealService } from "../../../services/meal.service";
 import { MealsSectionProps } from "./../../../app/(commonLayout)/page";
 import MealsFilters from "./meals-filters";
 
 export default async function MealsSection({
   searchParams,
 }: MealsSectionProps) {
-  const { data: allMeals } = await mealService.getmealPost();
+  const { data: allMeals } = await getAllMeals();
 
   const cuisines = Array.from(
     new Set(allMeals.map((meal: MealPost) => meal.cuisine).filter(Boolean)),

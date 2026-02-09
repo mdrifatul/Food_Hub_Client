@@ -1,6 +1,13 @@
 "use client";
 
-import { LogOut, Menu, Settings, ShoppingCart, Store, User } from "lucide-react";
+import {
+  LogOut,
+  Menu,
+  Settings,
+  ShoppingCart,
+  Store,
+  User,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -67,6 +74,7 @@ interface Navbar1Props {
   };
   isLoggedIn?: boolean;
   userName?: string;
+  userRole?: string;
 }
 
 const Navbar = ({
@@ -90,9 +98,9 @@ const Navbar = ({
   className,
   isLoggedIn = false,
   userName,
+  userRole,
 }: Navbar1Props) => {
   const router = useRouter();
-  
 
   const { totalItems } = useCart();
   const handleLogout = async () => {
@@ -103,10 +111,8 @@ const Navbar = ({
   return (
     <section className={cn("py-4 dark:bg-gray-950", className)}>
       <div className="w-11/12 mx-auto">
-
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
-
             <a href={logo.url} className="flex items-center gap-2">
               <span className="text-2xl font-semibold tracking-tighter text-orange-600">
                 {logo.title}
@@ -142,7 +148,6 @@ const Navbar = ({
                   </Link>
                 </Button>
 
-
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -165,13 +170,17 @@ const Navbar = ({
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                    >
-                      <Link className="cursor-pointer text-orange-600 flex" href="/providerForm">
-                        <Store className="mr-4 h-4 w-4" />
-                        <span>Provider Account</span>
-                      </Link>
-                    </DropdownMenuItem>
+                    {userRole === "USER" && (
+                      <DropdownMenuItem>
+                        <Link
+                          className="cursor-pointer text-orange-600 flex"
+                          href="/providerForm"
+                        >
+                          <Store className="mr-4 h-4 w-4" />
+                          <span>Provider Account</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem
                       onClick={handleLogout}
                       className="cursor-pointer text-red-600 focus:text-red-600"
@@ -269,14 +278,18 @@ const Navbar = ({
                             Dashboard
                           </Link>
                         </Button>
-                        <Button 
-                        variant="outline"
+                        <Button
+                          variant="outline"
                           className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
-                          asChild>
-                          <Link className="cursor-pointer text-orange-600 flex" href="/providerForm">
-                        <Store className="mr-4 h-4 w-4" />
-                        <span>Provider Account</span>
-                      </Link>
+                          asChild
+                        >
+                          <Link
+                            className="cursor-pointer text-orange-600 flex"
+                            href="/providerForm"
+                          >
+                            <Store className="mr-4 h-4 w-4" />
+                            <span>Provider Account</span>
+                          </Link>
                         </Button>
 
                         <Button

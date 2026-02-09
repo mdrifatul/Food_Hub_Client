@@ -14,7 +14,7 @@ export interface createMeal {
   title: string;
   price: number;
   cuisine: string;
-  dietaryPreferences?: string[];
-  imageUrl?: string | null;
-  isAvailable?: boolean;
+  dietaryPreferences?: string[] | undefined;
+  imageUrl?: string | undefined;
+  isAvailable?: boolean | undefined;
 }

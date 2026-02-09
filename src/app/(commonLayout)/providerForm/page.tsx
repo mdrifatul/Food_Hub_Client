@@ -16,9 +16,11 @@ export default async function ProviderFormPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-2xl mx-auto">
-        <ProviderRegistrationForm authorId={userId} />
+    <div className="bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-2xl mx-auto">
+          <ProviderRegistrationForm authorId={userId} />
+        </div>
       </div>
     </div>
   );

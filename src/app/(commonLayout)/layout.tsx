@@ -10,9 +10,10 @@ export default async function HomeLayout({
   const { data: session } = await userService.getSession();
   const isLoggedIn = !!session;
   const userName = session?.user?.name || session?.name;
+  const userRole = session?.user?.role || session?.role;
   return (
     <div>
-      <Navbar isLoggedIn={isLoggedIn} userName={userName} />
+      <Navbar isLoggedIn={isLoggedIn} userName={userName} userRole={userRole} />
       <div className="mx-auto">{children}</div>
       <Footer />
     </div>

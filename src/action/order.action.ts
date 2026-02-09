@@ -12,3 +12,16 @@ export const getOrder = async () => {
   const res = await orderService.getAllOrder();
   return res;
 };
+
+export const getOrderById = async (orderId: string) => {
+  const res = await orderService.getOrderById(orderId);
+  return res;
+};
+
+export const updateOrderStatus = async (
+  orderId: string,
+  status: "pending" | "processing" | "ready" | "delivered" | "cancelled",
+) => {
+  const res = await orderService.updateOrderStatus(orderId, status);
+  return res;
+};
