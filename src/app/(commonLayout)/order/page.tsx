@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useCart } from "@/lib/user-cart";
+import { useCart } from "@/context/CartContext";
 import { useForm } from "@tanstack/react-form";
 import Image from "next/image";
 import Link from "next/link";

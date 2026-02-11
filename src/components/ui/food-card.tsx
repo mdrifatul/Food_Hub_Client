@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCart } from "@/lib/user-cart";
+import { useCart } from "@/context/CartContext";
 import { MealPost } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
