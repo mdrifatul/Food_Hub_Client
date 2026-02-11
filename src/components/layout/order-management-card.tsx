@@ -45,10 +45,10 @@ interface OrderManagementCardProps {
 }
 
 const statusColors: Record<string, string> = {
-  pending: "bg-yellow-100 text-yellow-800",
-  processing: "bg-blue-100 text-blue-800",
-  ready: "bg-green-100 text-green-800",
-  delivered: "bg-cyan-100 text-cyan-800",
+  PENDING: "bg-yellow-100 text-yellow-800",
+  PREPARING: "bg-blue-100 text-blue-800",
+  READY: "bg-green-100 text-green-800",
+  DELIVERED: "bg-cyan-100 text-cyan-800",
 };
 
 const statusOptions: Array<"PENDING" | "PREPARING" | "READY" | "DELIVERED"> = [
@@ -63,10 +63,9 @@ export function OrderManagementCard({
   onStatusUpdate,
 }: OrderManagementCardProps) {
   const [isUpdating, setIsUpdating] = useState(false);
-
+  const [currentStatus, setCurrentStatus] = useState(order.status);
   const handleStatusChange = async (newStatus: string) => {
-    console.log(newStatus);
-    if (newStatus === order.status) return;
+    if (newStatus === currentStatus) return;
 
     setIsUpdating(true);
     try {
@@ -74,10 +73,11 @@ export function OrderManagementCard({
         order.id,
         newStatus as "PENDING" | "PREPARING" | "READY" | "DELIVERED",
       );
-      console.log("Update result:", result);
+
       if (result?.error) {
         toast.error(result.error);
       } else {
+        setCurrentStatus(newStatus);
         toast.success(`Order status updated to ${newStatus}`);
         onStatusUpdate?.();
       }
@@ -102,9 +102,9 @@ export function OrderManagementCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className={`${statusColors[order.status]} px-3 py-1 h-auto`}
+                className={`${statusColors[currentStatus]} px-3 py-1 h-auto`}
               >
-                {order.status}
+                {currentStatus}
                 <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -113,7 +113,7 @@ export function OrderManagementCard({
                 <DropdownMenuItem
                   key={status}
                   onClick={() => handleStatusChange(status)}
-                  disabled={status === order.status || isUpdating}
+                  disabled={status === currentStatus || isUpdating}
                 >
                   {status}
                 </DropdownMenuItem>

@@ -1,3 +1,4 @@
+import { getUserById } from "@/action/user.action";
 import {
   Card,
   CardContent,
@@ -16,11 +17,13 @@ import {
   Shield,
   User as UserIcon,
 } from "lucide-react";
+import ProfileEditForm from "./ProfileEditForm";
 
 const UserDashboard = async () => {
-  const { data } = await userService.getSession();
-  const user: User = data?.user;
-
+  const { data: sessionData } = await userService.getSession();
+  const sessionUser: User = sessionData?.user;
+  const { data: dbUserData } = await getUserById(sessionUser.id);
+  const user: User = dbUserData;
   const formatDate = (dateString?: string) => {
     if (!dateString) return "N/A";
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -42,25 +45,28 @@ const UserDashboard = async () => {
       <Separator />
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-4">
-            <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center">
-              {user.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="h-20 w-20 rounded-full object-cover"
-                />
-              ) : (
-                <UserIcon className="h-10 w-10 text-primary" />
-              )}
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center">
+                {user.image ? (
+                  <img
+                    src={user.image}
+                    alt={user.name}
+                    className="h-20 w-20 rounded-full object-cover"
+                  />
+                ) : (
+                  <UserIcon className="h-10 w-10 text-primary" />
+                )}
+              </div>
+              <div>
+                <CardTitle className="text-2xl">{user?.name}</CardTitle>
+                <CardDescription className="flex items-center gap-2 mt-1">
+                  <Shield className="h-4 w-4" />
+                  <span className="capitalize">{user?.role}</span>
+                </CardDescription>
+              </div>
             </div>
-            <div>
-              <CardTitle className="text-2xl">{user.name}</CardTitle>
-              <CardDescription className="flex items-center gap-2 mt-1">
-                <Shield className="h-4 w-4" />
-                <span className="capitalize">{user.role}</span>
-              </CardDescription>
-            </div>
+            <ProfileEditForm user={user} />
           </div>
         </CardHeader>
         <CardContent>
@@ -73,7 +79,7 @@ const UserDashboard = async () => {
                 <p className="text-sm font-medium text-muted-foreground">
                   Email Address
                 </p>
-                <p className="text-sm font-semibold">{user.email}</p>
+                <p className="text-sm font-semibold">{user?.email}</p>
               </div>
             </div>
 
@@ -86,7 +92,7 @@ const UserDashboard = async () => {
                   Phone Number
                 </p>
                 <p className="text-sm font-semibold">
-                  {user.phone || "Not provided"}
+                  {user?.phone || "Not provided"}
                 </p>
               </div>
             </div>
@@ -98,9 +104,6 @@ const UserDashboard = async () => {
               <div className="space-y-1">
                 <p className="text-sm font-medium text-muted-foreground">
                   Address
-                </p>
-                <p className="text-sm font-semibold">
-                  {user.address || "Not provided"}
                 </p>
               </div>
             </div>
@@ -114,7 +117,7 @@ const UserDashboard = async () => {
                   Member Since
                 </p>
                 <p className="text-sm font-semibold">
-                  {formatDate(user.createdAt)}
+                  {formatDate(user?.createdAt)}
                 </p>
               </div>
             </div>

@@ -104,4 +104,71 @@ export const userService = {
       };
     }
   },
+
+  updateUserProfile: async function (
+    id: string,
+    data: { name?: string; phone?: string; address?: string; image?: string },
+  ) {
+    try {
+      const cookieStor = await cookies();
+      const res = await fetch(`${env.API_URL}/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStor.toString(),
+        },
+        body: JSON.stringify(data),
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        return {
+          data: null,
+          error: {
+            message: errorData?.message || "Failed to update profile",
+          },
+        };
+      }
+
+      const updatedUser = await res.json();
+      return { data: updatedUser, error: null };
+    } catch (err) {
+      return {
+        data: null,
+        error: {
+          message: err instanceof Error ? err.message : "Something went wrong",
+        },
+      };
+    }
+  },
+
+  getUserById: async function (id: string) {
+    try {
+      const cookieStor = await cookies();
+      const res = await fetch(`${env.API_URL}/users/${id}`, {
+        headers: {
+          Cookie: cookieStor.toString(),
+        },
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: "Failed to fetch user data" },
+        };
+      }
+
+      const user = await res.json();
+      return { data: user, error: null };
+    } catch (err) {
+      return {
+        data: null,
+        error: {
+          message: err instanceof Error ? err.message : "Something went wrong",
+        },
+      };
+    }
+  },
 };
