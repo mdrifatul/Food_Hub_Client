@@ -1,7 +1,7 @@
 import { env } from "@/env";
 import { orderMeal } from "@/types";
-
 import { cookies } from "next/headers";
+
 const API_URL = env.API_URL;
 
 export const orderService = {
@@ -50,28 +50,27 @@ export const orderService = {
     }
   },
 
-  // getIncomingOrders: async function () {
-  //   try {
-  //     const cookiesStore = await cookies();
-  //     const res = await fetch(`${API_URL}/orders/incoming`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Cookie: cookiesStore.toString(),
-  //       },
-  //     });
-  //     const data = await res.json();
+  getMyOrder: async function () {
+    try {
+      const cookiesStore = await cookies();
+      const res = await fetch(`${API_URL}/orders/myorder`, {
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookiesStore.toString(),
+        },
+      });
+      const data = await res.json();
 
-  //     if (!res.ok) {
-  //       throw new Error("Failed to get incoming orders");
-  //     }
+      if (!res.ok) {
+        throw new Error("Failed to get orders");
+      }
 
-  //     return { data: data, error: null };
-  //   } catch (err) {
-  //     return { data: null, error: "something went wrong" };
-  //   }
-  // },
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "something went wrong" };
+    }
+  },
 
-  // Get a single order by ID
   getOrderById: async function (orderId: string) {
     try {
       const cookiesStore = await cookies();
@@ -108,6 +107,27 @@ export const orderService = {
 
       if (!res.ok) {
         throw new Error("Failed to update order status");
+      }
+
+      return { data: data, error: null };
+    } catch (err) {
+      return { data: null, error: "something went wrong" };
+    }
+  },
+
+  getOrdersByAuthorId: async function (authorId: string) {
+    try {
+      const cookiesStore = await cookies();
+      const res = await fetch(`${API_URL}/orders?authorId=${authorId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookiesStore.toString(),
+        },
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error("Failed to get orders by author");
       }
 
       return { data: data, error: null };

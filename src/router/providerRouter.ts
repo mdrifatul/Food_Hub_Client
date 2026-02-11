@@ -14,7 +14,7 @@ export const providerRouter: Route[] = [
       },
       {
         title: "Orders",
-        url: "/provider-dashboard/orders",
+        url: "/provider-dashboard/myorders",
       },
       {
         title: "Home",

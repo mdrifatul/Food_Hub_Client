@@ -2,11 +2,10 @@ import { getMyOrder } from "@/action/order.action";
 import { OrderCard } from "@/components/layout/orderCard";
 import { Card } from "@/components/ui/card";
 
-const UserOrderPage = async () => {
-  const { data: orders } = await getMyOrder();
-  console.log(orders);
-  const orderList = orders?.data || [];
-
+const MyOrders = async () => {
+  const orders = await getMyOrder();
+  const orderList = orders?.data?.data || [];
+  console.log(orderList);
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">My Orders</h1>
@@ -26,4 +25,4 @@ const UserOrderPage = async () => {
   );
 };
 
-export default UserOrderPage;
+export default MyOrders;

@@ -3,8 +3,7 @@ import { OrdersTable } from "@/components/layout/OrdersTable";
 
 const AllOrders = async () => {
   const { data: orders } = await getOrder();
-  
-  const orderList = orders?.data || []
+  const orderList = orders || [];
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -21,4 +20,4 @@ const AllOrders = async () => {
   );
 };
 
-export default AllOrders;  
+export default AllOrders;

@@ -66,8 +66,8 @@ const AllMeals = () => {
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           My Meals
         </h1>
-        <Link href="/provider-dashboard">
-          <Button className="bg-orange-500 hover:bg-orange-600">
+        <Link href="/provider-dashboard/addmeals">
+          <Button className="bg-linear-to-r from-orange-500 to-red-500">
             Create New Meal
           </Button>
         </Link>

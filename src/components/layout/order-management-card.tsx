@@ -26,7 +26,7 @@ interface OrderItem {
 
 interface Order {
   id: string;
-  status: "pending" | "processing" | "ready" | "delivered" | "cancelled";
+  status: string;
   totalPrice: number;
   deliveryAddress: string;
   createdAt: string;
@@ -49,12 +49,14 @@ const statusColors: Record<string, string> = {
   processing: "bg-blue-100 text-blue-800",
   ready: "bg-green-100 text-green-800",
   delivered: "bg-cyan-100 text-cyan-800",
-  cancelled: "bg-red-100 text-red-800",
 };
 
-const statusOptions: Array<
-  "pending" | "processing" | "ready" | "delivered" | "cancelled"
-> = ["pending", "processing", "ready", "delivered", "cancelled"];
+const statusOptions: Array<"pending" | "processing" | "ready" | "delivered"> = [
+  "pending",
+  "processing",
+  "ready",
+  "delivered",
+];
 
 export function OrderManagementCard({
   order,
@@ -69,12 +71,7 @@ export function OrderManagementCard({
     try {
       const result = await updateOrderStatus(
         order.id,
-        newStatus as
-          | "pending"
-          | "processing"
-          | "ready"
-          | "delivered"
-          | "cancelled",
+        newStatus as "pending" | "processing" | "ready" | "delivered",
       );
 
       if (result?.error) {

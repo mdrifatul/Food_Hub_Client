@@ -13,6 +13,11 @@ export const getOrder = async () => {
   return res;
 };
 
+export const getMyOrder = async () => {
+  const res = await orderService.getMyOrder();
+  return res;
+};
+
 export const getOrderById = async (orderId: string) => {
   const res = await orderService.getOrderById(orderId);
   return res;
@@ -23,5 +28,10 @@ export const updateOrderStatus = async (
   status: "pending" | "processing" | "ready" | "delivered" | "cancelled",
 ) => {
   const res = await orderService.updateOrderStatus(orderId, status);
+  return res;
+};
+
+export const getOrdersByAuthorId = async (authorId: string) => {
+  const res = await orderService.getOrdersByAuthorId(authorId);
   return res;
 };
