@@ -23,10 +23,7 @@ export const getOrderById = async (orderId: string) => {
   return res;
 };
 
-export const updateOrderStatus = async (
-  orderId: string,
-  status: "pending" | "processing" | "ready" | "delivered" | "cancelled",
-) => {
+export const updateOrderStatus = async (orderId: string, status: string) => {
   const res = await orderService.updateOrderStatus(orderId, status);
   return res;
 };

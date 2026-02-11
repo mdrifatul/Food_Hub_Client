@@ -95,7 +95,7 @@ export const orderService = {
   updateOrderStatus: async function (orderId: string, status: string) {
     try {
       const cookiesStore = await cookies();
-      const res = await fetch(`${API_URL}/orders/${orderId}/status`, {
+      const res = await fetch(`${API_URL}/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

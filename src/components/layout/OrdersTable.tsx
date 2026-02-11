@@ -27,11 +27,6 @@ export const OrdersTable = ({ orders }: { orders: Order[] }) => {
     });
   };
 
-  // const formatCurrency = (amount: number) => {
-  //   return `$${amount.toFixed(2)}`;
-  // };
-
-
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden dark:bg-gray-900">
       <div className="overflow-x-auto">
@@ -82,13 +77,15 @@ export const OrdersTable = ({ orders }: { orders: Order[] }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.status === "COMPLETED" || order.status === "DELIVERED"
+                      order.status === "COMPLETED" ||
+                      order.status === "DELIVERED"
                         ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                        : order.status === "PENDING" || order.status === "PROCESSING"
-                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
-                        : order.status === "CANCELLED"
-                        ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
-                        : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                        : order.status === "PENDING" ||
+                            order.status === "PROCESSING"
+                          ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                          : order.status === "CANCELLED"
+                            ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                            : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                     }`}
                   >
                     {order.status}

@@ -1,11 +1,12 @@
 import { getMyOrder } from "@/action/order.action";
-import { OrderCard } from "@/components/layout/orderCard";
+import { OrderManagementCard } from "@/components/layout/order-management-card";
 import { Card } from "@/components/ui/card";
 
 const MyOrders = async () => {
   const orders = await getMyOrder();
-  const orderList = orders?.data?.data || [];
-  console.log(orderList);
+  console.log("Orders response:", orders);
+
+  const orderList = Array.isArray(orders?.data?.data) ? orders?.data?.data : [];
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">My Orders</h1>
@@ -17,7 +18,7 @@ const MyOrders = async () => {
       ) : (
         <div className="space-y-4">
           {orderList.map((order: any) => (
-            <OrderCard key={order.id} order={order} />
+            <OrderManagementCard key={order.id} order={order} />
           ))}
         </div>
       )}

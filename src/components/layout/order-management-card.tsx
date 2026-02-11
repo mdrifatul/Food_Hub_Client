@@ -51,11 +51,11 @@ const statusColors: Record<string, string> = {
   delivered: "bg-cyan-100 text-cyan-800",
 };
 
-const statusOptions: Array<"pending" | "processing" | "ready" | "delivered"> = [
-  "pending",
-  "processing",
-  "ready",
-  "delivered",
+const statusOptions: Array<"PENDING" | "PREPARING" | "READY" | "DELIVERED"> = [
+  "PENDING",
+  "PREPARING",
+  "READY",
+  "DELIVERED",
 ];
 
 export function OrderManagementCard({
@@ -65,15 +65,16 @@ export function OrderManagementCard({
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleStatusChange = async (newStatus: string) => {
+    console.log(newStatus);
     if (newStatus === order.status) return;
 
     setIsUpdating(true);
     try {
       const result = await updateOrderStatus(
         order.id,
-        newStatus as "pending" | "processing" | "ready" | "delivered",
+        newStatus as "PENDING" | "PREPARING" | "READY" | "DELIVERED",
       );
-
+      console.log("Update result:", result);
       if (result?.error) {
         toast.error(result.error);
       } else {
