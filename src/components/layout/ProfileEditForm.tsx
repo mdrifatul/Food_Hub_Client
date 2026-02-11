@@ -58,17 +58,25 @@ export default function ProfileEditForm({
     setIsLoading(true);
 
     try {
-      if (!formData.name.trim()) {
-        toast.error("Name is required");
+      const updateData: any = {};
+
+      if (formData.name.trim()) {
+        updateData.name = formData.name.trim();
+      }
+      if (formData.phone.trim()) {
+        updateData.phone = formData.phone.trim();
+      }
+      if (formData.image.trim()) {
+        updateData.image = formData.image.trim();
+      }
+
+      if (Object.keys(updateData).length === 0) {
+        toast.error("Please enter at least one field to update");
         setIsLoading(false);
         return;
       }
 
-      const result = await updateUserProfile(user.id, {
-        name: formData.name,
-        phone: formData.phone,
-        image: formData.image,
-      });
+      const result = await updateUserProfile(user.id, updateData);
 
       if (result.error) {
         toast.error(result.error.message || "Failed to update profile");
@@ -99,12 +107,15 @@ export default function ProfileEditForm({
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
           <DialogDescription>
-            Update your profile information. Click save when you&apos;re done.
+            Update your profile information. All fields are optional.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name">
+              Full Name{" "}
+              <span className="text-xs text-muted-foreground">(Optional)</span>
+            </Label>
             <Input
               id="name"
               name="name"
@@ -115,7 +126,10 @@ export default function ProfileEditForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone">
+              Phone Number{" "}
+              <span className="text-xs text-muted-foreground">(Optional)</span>
+            </Label>
             <Input
               id="phone"
               name="phone"
@@ -127,7 +141,10 @@ export default function ProfileEditForm({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="image">Profile Image URL</Label>
+            <Label htmlFor="image">
+              Profile Image URL{" "}
+              <span className="text-xs text-muted-foreground">(Optional)</span>
+            </Label>
             <Input
               id="image"
               name="image"
