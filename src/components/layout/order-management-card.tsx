@@ -169,7 +169,7 @@ export function OrderManagementCard({
             {order.items.map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                className="flex items-center justify-between p-3 rounded-lg "
               >
                 <div className="flex-1">
                   <p className="font-medium">

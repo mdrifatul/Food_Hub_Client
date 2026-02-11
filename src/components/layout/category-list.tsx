@@ -30,12 +30,11 @@ export function CategoryList({ categories }: CategoryListProps) {
   const router = useRouter();
 
   const handleDelete = async (id: string, name: string) => {
-    const toastId = toast.loading("Deleting category...");
     try {
       const { error } = await deleteCategory(id);
 
       if (error) {
-        toast.error(error.message, { id: toastId });
+        toast.error(error.message || "Failed to delete category");
         return;
       }
 
@@ -45,7 +44,6 @@ export function CategoryList({ categories }: CategoryListProps) {
       toast.error("Something went wrong, please try again.");
     }
   };
-
 
   return (
     <div className="space-y-3">
