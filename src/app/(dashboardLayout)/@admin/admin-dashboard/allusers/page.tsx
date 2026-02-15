@@ -1,6 +1,8 @@
 import { getAllUser } from "@/action/user.action";
 import { UserTable } from "@/components/layout/UserTable";
 
+export const dynamic = "force-dynamic";
+
 const AllUsers = async () => {
   const { data: users } = await getAllUser();
 

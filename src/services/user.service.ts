@@ -12,10 +12,15 @@ export const userService = {
         cache: "no-store",
       });
 
-      const session = await res.json();
-      if (session === null) {
-        return { data: null, error: { message: "something went wrong" } };
+      if (!res.ok) {
+        return { data: null, error: { message: "unauthenticated" } };
       }
+
+      const session = await res.json();
+      if (!session || !session.user) {
+        return { data: null, error: { message: "unauthenticated" } };
+      }
+
       return { data: session, error: null };
     } catch (err) {
       return { data: null, error: { message: "something went wrong" } };

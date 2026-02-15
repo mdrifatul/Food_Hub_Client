@@ -17,11 +17,17 @@ import {
   Shield,
   User as UserIcon,
 } from "lucide-react";
+import { redirect } from "next/navigation";
 import ProfileEditForm from "./ProfileEditForm";
 
 const UserDashboard = async () => {
   const { data: sessionData } = await userService.getSession();
-  const sessionUser: User = sessionData?.user;
+
+  if (!sessionData?.user) {
+    redirect("/login");
+  }
+
+  const sessionUser: User = sessionData.user;
   const { data: dbUserData } = await getUserById(sessionUser.id);
   const user: User = dbUserData;
   const formatDate = (dateString?: string) => {

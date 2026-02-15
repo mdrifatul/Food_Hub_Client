@@ -32,6 +32,12 @@ export const orderService = {
   getAllOrder: async function () {
     try {
       const cookiesStore = await cookies();
+      const cookieString = cookiesStore.toString();
+
+      if (!cookieString) {
+        return { data: [], error: null };
+      }
+
       const res = await fetch(`${API_URL}/orders`, {
         headers: {
           "Content-Type": "application/json",

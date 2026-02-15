@@ -2,6 +2,8 @@ import { getMyOrder } from "@/action/order.action";
 import { OrderCard } from "@/components/layout/orderCard";
 import { Card } from "@/components/ui/card";
 
+export const dynamic = "force-dynamic";
+
 const UserOrderPage = async () => {
   const { data: orders } = await getMyOrder();
   console.log(orders);
