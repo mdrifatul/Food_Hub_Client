@@ -86,10 +86,6 @@ const Navbar = ({
   },
   menu = [
     { title: "Home", url: "/" },
-    {
-      title: "About",
-      url: "/about",
-    },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
@@ -132,6 +128,16 @@ const Navbar = ({
 
             {isLoggedIn ? (
               <>
+                {userRole === "USER" && (
+                  <Button
+                    asChild
+                    className="bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
+                  >
+                    <Link href="/providerForm">
+                      <span>Create Provider Account</span>
+                    </Link>
+                  </Button>
+                )}
                 <Button
                   variant="outline"
                   size="icon"
@@ -170,17 +176,6 @@ const Navbar = ({
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    {userRole === "USER" && (
-                      <DropdownMenuItem>
-                        <Link
-                          className="cursor-pointer text-orange-600 flex"
-                          href="/providerForm"
-                        >
-                          <Store className="mr-4 h-4 w-4" />
-                          <span>Provider Account</span>
-                        </Link>
-                      </DropdownMenuItem>
-                    )}
                     <DropdownMenuItem
                       onClick={handleLogout}
                       className="cursor-pointer text-red-600 focus:text-red-600"
@@ -280,13 +275,10 @@ const Navbar = ({
                         </Button>
                         <Button
                           variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
+                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50 w-full justify-start"
                           asChild
                         >
-                          <Link
-                            className="cursor-pointer text-orange-600 flex"
-                            href="/providerForm"
-                          >
+                          <Link href="/providerForm">
                             <Store className="mr-4 h-4 w-4" />
                             <span>Provider Account</span>
                           </Link>

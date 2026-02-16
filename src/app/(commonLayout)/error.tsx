@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { AlertCircle, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 
-export default function AboutError({
+export default function Error({
   error,
   reset,
 }: {
@@ -16,7 +16,7 @@ export default function AboutError({
   }, [error]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-950 p-4">
+    <div className="flex items-center justify-center min-h-[60vh] w-full bg-white dark:bg-gray-950 p-4">
       <div className="text-center space-y-6 max-w-md">
         <div className="mx-auto w-20 h-20 bg-red-100 dark:bg-red-950 rounded-full flex items-center justify-center animate-pulse">
           <AlertCircle className="h-10 w-10 text-red-600 dark:text-red-400" />

@@ -1,8 +1,8 @@
 import { Loader2, UtensilsCrossed } from "lucide-react";
 
-const loading = async () => {
+const Loading = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-950 ">
+    <div className="flex items-center justify-center min-h-[60vh] w-full bg-white dark:bg-gray-950">
       <div className="flex flex-col items-center gap-6">
         {/* Logo or Icon */}
         <div className="relative">
@@ -19,4 +19,4 @@ const loading = async () => {
   );
 };
 
-export default loading;
+export default Loading;
