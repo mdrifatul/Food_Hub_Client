@@ -11,6 +11,7 @@ export default async function HomeLayout({
   const isLoggedIn = !!session;
   const userName = session?.user?.name || session?.name;
   const userRole = session?.user?.role || session?.role;
+
   return (
     <div>
       <Navbar isLoggedIn={isLoggedIn} userName={userName} userRole={userRole} />

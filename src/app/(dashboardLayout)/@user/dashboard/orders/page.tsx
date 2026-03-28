@@ -6,7 +6,6 @@ export const dynamic = "force-dynamic";
 
 const UserOrderPage = async () => {
   const { data: orders } = await getMyOrder();
-  console.log(orders);
   const orderList = orders?.data || [];
 
   return (

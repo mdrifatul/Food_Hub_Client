@@ -9,7 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import { Roles } from "@/contants/roles";
 import { adminRouter } from "@/router/adminRouter";
@@ -60,5 +60,5 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

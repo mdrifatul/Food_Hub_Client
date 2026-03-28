@@ -84,9 +84,7 @@ const Navbar = ({
     alt: "logo",
     title: "Food Hub",
   },
-  menu = [
-    { title: "Home", url: "/" },
-  ],
+  menu = [{ title: "Home", url: "/" }],
   auth = {
     login: { title: "Login", url: "/login" },
     signup: { title: "Register", url: "/register" },
@@ -170,7 +168,10 @@ const Navbar = ({
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                      <Link href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`} className="cursor-pointer">
+                      <Link
+                        href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`}
+                        className="cursor-pointer"
+                      >
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Dashboard</span>
                       </Link>
@@ -268,7 +269,9 @@ const Navbar = ({
                           className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
                           asChild
                         >
-                          <Link href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`}>
+                          <Link
+                            href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`}
+                          >
                             <Settings className="h-5 w-5 mr-2" />
                             Dashboard
                           </Link>

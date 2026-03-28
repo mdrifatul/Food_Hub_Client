@@ -38,7 +38,8 @@ export function LoginForm({
   const handleGoogleLogin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://foodhub-client-nu.vercel.app",
+      // callbackURL: "https://foodhub-client-nu.vercel.app",
+      callbackURL: "http://localhost:3000",
     });
     console.log(data);
   };

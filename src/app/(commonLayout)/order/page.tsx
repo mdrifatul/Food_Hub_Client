@@ -1,20 +1,20 @@
 "use client";
 
 import { postOrder } from "@/action/order.action";
+import { createCheckoutSession } from "@/action/payment.action";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from "@/context/CartContext";
 import { useForm } from "@tanstack/react-form";
+import { CreditCard, Loader2, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export default function OrderPage() {
-  const router = useRouter();
   const { items, totalPrice, clearCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,32 +23,65 @@ export default function OrderPage() {
       address: "",
     },
     onSubmit: async (values) => {
-      setIsLoading(true);
-      try {
-        const orderData = {
-          deliveryAddress: values.value.address,
-          items: items.map((item) => ({
-            mealId: item.id,
-            quantity: item.quantity,
-          })),
-        };
-        const result = await postOrder(orderData);
-        if (result?.error) {
-          toast.error(result.error);
-          setIsLoading(false);
-          return;
-        }
-
-        clearCart();
-
-        toast.success("Order placed successfully!");
-        router.push("/dashboard/orders");
-      } catch (error) {
-        toast.error("Failed to place order");
-        setIsLoading(false);
-      }
+      await handlePlaceOrder(values.value.address);
     },
   });
+
+  const handlePlaceOrder = async (address: string) => {
+    setIsLoading(true);
+    try {
+      // Step 1: Create the order in the backend
+      const orderData = {
+        deliveryAddress: address,
+        paymentMethod: "STRIPE" as const,
+        items: items.map((item) => ({
+          mealId: item.id,
+          quantity: item.quantity,
+        })),
+      };
+
+      const orderResult = await postOrder(orderData);
+
+      if (orderResult?.error) {
+        toast.error(orderResult.error);
+        setIsLoading(false);
+        return;
+      }
+
+      const orderId = orderResult?.data?.id;
+
+      if (!orderId) {
+        toast.error("Failed to create order. Please try again.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Step 2: Create a Stripe Checkout Session for that order
+      const paymentResult = await createCheckoutSession(orderId);
+
+      if (paymentResult?.error) {
+        toast.error(paymentResult.error);
+        setIsLoading(false);
+        return;
+      }
+
+      const checkoutUrl = paymentResult?.data?.url;
+
+      if (!checkoutUrl) {
+        toast.error("Failed to create payment session. Please try again.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Step 3: Clear cart and redirect to Stripe Checkout
+      clearCart();
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      console.error("Order error:", error);
+      toast.error("Failed to place order. Please try again.");
+      setIsLoading(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -159,11 +192,30 @@ export default function OrderPage() {
                       disabled={isLoading}
                       className="flex-1 bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
                     >
-                      {isLoading ? "Processing..." : "Confirm Order"}
+                      {isLoading ? (
+                        <div className="flex items-center gap-2">
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Redirecting to Payment...
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <CreditCard className="w-4 h-4" />
+                          Pay ${totalPrice.toFixed(2)}
+                        </div>
+                      )}
                     </Button>
                   </div>
                 </form>
               </Card>
+
+              {/* Stripe security notice */}
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 px-2">
+                <ShieldCheck className="w-4 h-4 text-green-500" />
+                <span>
+                  Payments are securely processed by Stripe. Your card details
+                  are never stored on our servers.
+                </span>
+              </div>
             </div>
 
             <div className="lg:col-span-1">

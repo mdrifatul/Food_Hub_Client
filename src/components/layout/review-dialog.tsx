@@ -66,20 +66,24 @@ export function ReviewDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-125">
-        <DialogHeader>
-          <DialogTitle>Write a Review</DialogTitle>
-          <DialogDescription>
-            Share your experience with this meal
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 shadow-2xl rounded-2xl p-0 overflow-hidden">
+        <div className="bg-linear-to-r from-orange-500/10 to-transparent p-6 pb-0">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Write a Review
+            </DialogTitle>
+            <DialogDescription className="text-gray-500 dark:text-gray-400">
+              Share your experience with this meal
+            </DialogDescription>
+          </DialogHeader>
+        </div>
 
         <form
           onSubmit={(e) => {
             e.preventDefault();
             form.handleSubmit();
           }}
-          className="space-y-6"
+          className="p-6 space-y-6"
         >
           <form.Field
             name="rating"
@@ -92,9 +96,9 @@ export function ReviewDialog({
               },
             }}
             children={(field) => (
-              <div className="space-y-2">
-                <Label>Rating</Label>
-                <div className="flex items-center gap-2">
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Rating</Label>
+                <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl w-fit">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       key={star}
@@ -102,24 +106,24 @@ export function ReviewDialog({
                       onClick={() => field.handleChange(star)}
                       onMouseEnter={() => setHoveredRating(star)}
                       onMouseLeave={() => setHoveredRating(0)}
-                      className="transition-transform hover:scale-110"
+                      className="transition-all hover:scale-110 active:scale-95"
                     >
                       <Star
                         className={`w-8 h-8 ${
                           star <= (hoveredRating || field.state.value)
-                            ? "fill-yellow-400 text-yellow-400"
-                            : "text-gray-300"
+                            ? "fill-orange-500 text-orange-500"
+                            : "text-gray-300 dark:text-gray-600"
                         }`}
                       />
                     </button>
                   ))}
-                  <span className="ml-2 text-sm text-gray-600">
+                  <span className="ml-4 text-sm font-medium text-orange-600 dark:text-orange-400">
                     {field.state.value > 0 &&
                       `${field.state.value} star${field.state.value > 1 ? "s" : ""}`}
                   </span>
                 </div>
                 {field.state.meta.errors && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-red-500 font-medium">
                     {field.state.meta.errors[0]}
                   </p>
                 )}
@@ -139,8 +143,15 @@ export function ReviewDialog({
               },
             }}
             children={(field) => (
-              <div className="space-y-2">
-                <Label htmlFor="comment">Comment</Label>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <Label htmlFor="comment" className="text-base font-semibold">
+                    Comment
+                  </Label>
+                  <span className="text-xs text-gray-500 font-medium">
+                    {field.state.value.length} characters
+                  </span>
+                </div>
                 <Textarea
                   id="comment"
                   value={field.state.value}
@@ -148,30 +159,32 @@ export function ReviewDialog({
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Share your thoughts about this meal..."
                   rows={4}
-                  className="resize-none"
+                  className="resize-none bg-gray-50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-800 focus:border-orange-500/50 focus:ring-orange-500/20 rounded-xl p-4 transition-all"
                 />
                 {field.state.meta.errors && (
-                  <p className="text-sm text-red-500">
+                  <p className="text-sm text-red-500 font-medium">
                     {field.state.meta.errors[0]}
                   </p>
                 )}
-                <p className="text-xs text-gray-500">
-                  {field.state.value.length} characters
-                </p>
               </div>
             )}
           />
 
-          <DialogFooter>
+          <DialogFooter className="gap-2 sm:gap-0 mt-4">
             <Button
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={isLoading}
+              className="rounded-xl border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="rounded-xl bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-lg shadow-orange-500/20 transition-all active:scale-[0.98]"
+            >
               {isLoading ? "Submitting..." : "Submit Review"}
             </Button>
           </DialogFooter>

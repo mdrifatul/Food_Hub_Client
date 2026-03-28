@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    unoptimized: process.env.NODE_ENV === "development", // Disable optimization in dev
   },
   async rewrites() {
     return [

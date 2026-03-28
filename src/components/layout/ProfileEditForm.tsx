@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -13,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User } from "@/types";
-import { Edit, Loader2 } from "lucide-react";
+import { Loader2, PenLine } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -70,12 +71,6 @@ export default function ProfileEditForm({
         updateData.image = formData.image.trim();
       }
 
-      if (Object.keys(updateData).length === 0) {
-        toast.error("Please enter at least one field to update");
-        setIsLoading(false);
-        return;
-      }
-
       const result = await updateUserProfile(user.id, updateData);
 
       if (result.error) {
@@ -98,64 +93,61 @@ export default function ProfileEditForm({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Edit className="h-4 w-4" />
+        <Button variant="outline" size="sm" className="gap-2 shadow-sm">
+          <PenLine className="h-4 w-4" />
           Edit Profile
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-106.25">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Edit Profile</DialogTitle>
+          <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Update your profile information. All fields are optional.
+            Make changes to your profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">
-              Full Name{" "}
-              <span className="text-xs text-muted-foreground">(Optional)</span>
-            </Label>
-            <Input
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Enter your full name"
-              disabled={isLoading}
-            />
+
+        <form onSubmit={handleSubmit} className="space-y-6 pt-4">
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Enter your full name"
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="e.g. +1 (555) 000-0000"
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="image">Profile Image URL</Label>
+              <Input
+                id="image"
+                name="image"
+                type="url"
+                value={formData.image}
+                onChange={handleInputChange}
+                placeholder="https://example.com/image.jpg"
+                disabled={isLoading}
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">
-              Phone Number{" "}
-              <span className="text-xs text-muted-foreground">(Optional)</span>
-            </Label>
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="Enter your phone number"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="image">
-              Profile Image URL{" "}
-              <span className="text-xs text-muted-foreground">(Optional)</span>
-            </Label>
-            <Input
-              id="image"
-              name="image"
-              type="url"
-              value={formData.image}
-              onChange={handleInputChange}
-              placeholder="Enter image URL (e.g., https://...)"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="flex gap-3 justify-end pt-4">
+
+          <DialogFooter>
             <Button
               type="button"
               variant="outline"
@@ -164,11 +156,11 @@ export default function ProfileEditForm({
             >
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading} className="gap-2">
-              {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-              {isLoading ? "Saving..." : "Save Changes"}
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Save changes
             </Button>
-          </div>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
