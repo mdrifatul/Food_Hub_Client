@@ -1,105 +1,101 @@
 // components/sections/hero-section.tsx
-import { Button } from "@/components/ui/button";
-import { MapPin, Search } from "lucide-react";
-import Image from "next/image"; // ✅ Import Next.js Image
+import { Bike, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="relative py-20 lg:py-5 lg:h-screen overflow-hidden dark:bg-gray-950">
+    <section className="relative min-h-150 lg:min-h-screen flex items-center py-20 lg:py-0 overflow-hidden bg-background">
+      {/* Background Decorative Blobs */}
+      <div className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 w-full h-200 opacity-40 dark:opacity-20 pointer-events-none flex justify-center">
+        <div className="absolute top-[10%] -left-[10%] lg:left-[10%] w-75 h-75 bg-orange-400/30 rounded-full blur-[100px] mix-blend-multiply flex-none" />
+        <div className="absolute top-[20%] -right-[10%] lg:right-[10%] w-100 h-100 bg-red-400/20 rounded-full blur-[120px] mix-blend-multiply flex-none" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Discover & Order{" "}
-                <span className="bg-linear-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
-                  Delicious Meals
-                </span>
-              </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl">
-                Browse menus from your favorite restaurants and get meals
-                delivered right to your doorstep. Fast, easy, and delicious!
-              </p>
+          <div className="space-y-8 relative z-10 w-full max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-semibold mb-2 w-fit mx-auto lg:mx-0 shadow-sm">
+              <Bike className="w-4 h-4" />
+              <span>Lightning Fast Delivery in 20 mins!</span>
             </div>
 
-            {/* Search Bar */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-2 flex flex-col sm:flex-row gap-2 max-w-2xl border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center flex-1 px-4 py-2 bg-gray-50 dark:bg-gray-900 rounded-lg">
-                <MapPin className="h-5 w-5 text-gray-400 mr-2" />
-                <input
-                  type="text"
-                  placeholder="Enter your delivery address"
-                  className="flex-1 bg-transparent border-none outline-none text-sm"
-                />
-              </div>
-              <Button className="bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white shadow-md w-full sm:w-auto">
-                <Search className="h-4 w-4 mr-2" />
-                Find Food
-              </Button>
-            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.15]">
+              The Ultimate
+              <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-red-500 pb-2">
+                {" "}
+                FoodHub{" "}
+              </span>
+              Experience
+            </h1>
 
-            {/* Stats */}
-            <div className="flex gap-8 pt-4">
-              <div>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                  500+
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Restaurants
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                  10k+
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Meals Delivered
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                  4.8★
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Average Rating
-                </p>
-              </div>
-            </div>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 font-medium">
+              Satisfy your cravings with FoodHub. Discover top-tier local
+              restaurants, explore diverse menus, and get your favorite meals
+              delivered blazing fast.
+            </p>
           </div>
 
-          {/* Right Image */}
-          <div className="relative">
-            <div className="relative h-100 lg:h-125">
-              {/* Decorative circles */}
-              <div className="absolute -top-4 -left-4 w-72 h-72 bg-orange-200 dark:bg-orange-900/20 rounded-full blur-3xl opacity-50"></div>
-              <div className="absolute -bottom-4 -right-4 w-72 h-72 bg-red-200 dark:bg-red-900/20 rounded-full blur-3xl opacity-50"></div>
+          {/* Right Content - Visuals */}
+          <div className="relative mt-16 lg:mt-0 lg:h-150 flex items-center justify-center pointer-events-none">
+            {/* Decorative Rings */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-85 h-85 md:w-120 md:h-120 border-2 border-dashed border-orange-200 dark:border-orange-900/40 rounded-full animate-[spin_60s_linear_infinite]" />
 
-              {/* Main food image - Using Next.js Image */}
-              <div className="relative z-10 h-full w-full">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-70 h-70 md:w-100 md:h-100 bg-orange-50/80 dark:bg-orange-500/5 rounded-full" />
+
+            {/* Main Center Image */}
+            <div className="relative z-20 w-65 h-65 md:w-90 md:h-90 rounded-full p-2 bg-background shadow-2xl overflow-hidden drop-shadow-xl pointer-events-auto group">
+              <div className="relative w-full h-full rounded-full overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
-                  alt="Delicious food"
+                  src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1000"
+                  alt="Healthy Food Bowl"
                   fill
-                  className="rounded-2xl shadow-2xl object-cover"
+                  className="object-cover scale-110 group-hover:scale-125 transition-transform duration-700 ease-out"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
+            </div>
 
-              {/* Floating card */}
-              <div className="absolute bottom-8 left-8 bg-white dark:bg-gray-800 rounded-xl shadow-xl p-4 z-20 border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 bg-linear-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                    🍕
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">Pizza Delivered!</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      In 25 mins
-                    </p>
-                  </div>
-                </div>
+            {/* Floating Element 1 - Top Right */}
+            <div
+              className="absolute z-30 top-[5%] -right-2 md:right-4 lg:right-0 bg-background border shadow-xl rounded-2xl p-3 flex items-center gap-3 animate-bounce shadow-orange-500/10 pointer-events-auto"
+              style={{ animationDuration: "4s" }}
+            >
+              <div className="w-12 h-12 rounded-full overflow-hidden relative shadow-inner">
+                <Image
+                  src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200"
+                  alt="Burger"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="pr-2">
+                <p className="text-sm font-bold text-foreground">
+                  Gourmet Burger
+                </p>
+                <p className="text-xs text-muted-foreground font-medium">
+                  Top Choice 🔥
+                </p>
+              </div>
+            </div>
+
+            {/* Floating Element 2 - Bottom Left */}
+            <div
+              className="absolute z-30 bottom-[10%] -left-2 md:left-4 lg:-left-4 bg-background border shadow-xl rounded-2xl py-3 px-5 flex items-center gap-3 animate-bounce shadow-orange-500/10 pointer-events-auto"
+              style={{ animationDuration: "5s", animationDelay: "1s" }}
+            >
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                <CheckCircle2 className="w-6 h-6" />
+              </span>
+              <div className="flex flex-col">
+                <p className="text-sm font-bold text-foreground">
+                  Delivery Arrived
+                </p>
+                <p className="text-xs text-muted-foreground font-medium">
+                  Enjoy your meal!
+                </p>
               </div>
             </div>
           </div>

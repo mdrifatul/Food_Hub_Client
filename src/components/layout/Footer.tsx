@@ -1,198 +1,160 @@
-import { Button } from "@/components/ui/button";
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-} from "lucide-react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-orange-600 text-2xl font-bold mb-4">
-              FoodHub 🍱
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-4">
-              Discover & order delicious meals from the best restaurants in your
-              area.
+    <footer className="border-t border-border bg-background relative overflow-hidden">
+      {/* Super subtle modern glow */}
+      <div className="absolute top-0 right-1/4 w-lg h-lg bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-8 mb-16">
+          {/* Brand */}
+          <div className="lg:w-1/3">
+            <Link
+              href="/"
+              className="inline-block mb-4 hover:opacity-80 transition-opacity"
+            >
+              <h3 className="text-3xl font-black tracking-tighter text-foreground flex items-center gap-2">
+                <span className="bg-linear-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+                  FoodHub
+                </span>
+                <span className="text-2xl">🍱</span>
+              </h3>
+            </Link>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs font-medium">
+              The ultimate food delivery experience. Fast, fresh, and reliable
+              right to your doorstep.
             </p>
-            <div className="flex space-x-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-gray-100 dark:hover:bg-gray-800"
-                asChild
-              >
-                <Link href="#" aria-label="Facebook">
-                  <Facebook className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-gray-100 dark:hover:bg-gray-800"
-                asChild
-              >
-                <Link href="#" aria-label="Instagram">
-                  <Instagram className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-gray-100 dark:hover:bg-gray-800"
-                asChild
-              >
-                <Link href="#" aria-label="Twitter">
-                  <Twitter className="h-5 w-5" />
-                </Link>
-              </Button>
+          </div>
+
+          {/* Links Group */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 lg:w-2/3 lg:justify-end">
+            <div>
+              <h4 className="text-foreground font-semibold tracking-wide mb-6 text-sm">
+                Product
+              </h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link
+                    href="/meals"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Browse Meals
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/providers"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Restaurants
+                  </Link>
+                </li>
+              </ul>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-gray-900 dark:text-white font-semibold mb-4">
-              Quick Links
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/">Home</Link>
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/meals">Browse Meals</Link>
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/providers">Restaurants</Link>
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/about">About Us</Link>
-                </Button>
-              </li>
-            </ul>
-          </div>
+            <div>
+              <h4 className="text-foreground font-semibold tracking-wide mb-6 text-sm">
+                Company
+              </h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/register?role=provider"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Partner With Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/provider/dashboard"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* For Partners */}
-          <div>
-            <h4 className="text-gray-900 dark:text-white font-semibold mb-4">
-              For Partners
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/register?role=provider">Become a Provider</Link>
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/provider/dashboard">Provider Dashboard</Link>
-                </Button>
-              </li>
-              <li>
-                <Button
-                  variant="link"
-                  className="p-0 h-auto text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  asChild
-                >
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-gray-900 dark:text-white font-semibold mb-4">
-              Contact Us
-            </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin className="h-5 w-5 mr-2 mt-0.5 shrink-0 text-gray-600 dark:text-gray-400" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  123 Food Street, Chattogram, Bangladesh
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Phone className="h-5 w-5 mr-2 shrink-0 text-gray-600 dark:text-gray-400" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  +880 1234-567890
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Mail className="h-5 w-5 mr-2 shrink-0 text-gray-600 dark:text-gray-400" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  support@foodhub.com
-                </span>
-              </li>
-            </ul>
+            <div>
+              <h4 className="text-foreground font-semibold tracking-wide mb-6 text-sm">
+                Legal
+              </h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link
+                    href="/privacy"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/terms"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/cookies"
+                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
+                  >
+                    Cookie Policy
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+        {/* Bottom minimalist line */}
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-muted-foreground text-sm font-medium">
             © {new Date().getFullYear()} FoodHub. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-6 mt-4 md:mt-0">
-            <Button
-              variant="link"
-              className="p-0 h-auto text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              asChild
+          <div className="flex space-x-6">
+            <Link
+              href="#"
+              aria-label="Facebook"
+              className="text-muted-foreground hover:text-orange-500 transition-colors"
             >
-              <Link href="/privacy">Privacy Policy</Link>
-            </Button>
-            <Button
-              variant="link"
-              className="p-0 h-auto text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              asChild
+              <Facebook className="h-4 w-4" />
+            </Link>
+            <Link
+              href="#"
+              aria-label="Instagram"
+              className="text-muted-foreground hover:text-orange-500 transition-colors"
             >
-              <Link href="/terms">Terms of Service</Link>
-            </Button>
-            <Button
-              variant="link"
-              className="p-0 h-auto text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              asChild
+              <Instagram className="h-4 w-4" />
+            </Link>
+            <Link
+              href="#"
+              aria-label="Twitter"
+              className="text-muted-foreground hover:text-orange-500 transition-colors"
             >
-              <Link href="/cookies">Cookie Policy</Link>
-            </Button>
+              <Twitter className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </div>

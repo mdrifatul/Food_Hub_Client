@@ -3,12 +3,17 @@
 import { postOrder } from "@/action/order.action";
 import { createCheckoutSession } from "@/action/payment.action";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from "@/context/CartContext";
 import { useForm } from "@tanstack/react-form";
-import { CreditCard, Loader2, ShieldCheck } from "lucide-react";
+import {
+  ChevronLeft,
+  CreditCard,
+  MapPin,
+  ShieldCheck,
+  ShoppingBag,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -85,10 +90,23 @@ export default function OrderPage() {
 
   if (items.length === 0) {
     return (
-      <div className="border-gray-200 dark:bg-gray-950">
-        <div className="container mx-auto px-4 py-16 text-center ">
-          <h1 className="text-3xl font-bold mb-4">No Items in Cart</h1>
-          <Button asChild>
+      <div className="min-h-[75vh] flex flex-col items-center justify-center bg-transparent relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-zinc-200/50 dark:bg-zinc-800/30 blur-[100px] rounded-full pointer-events-none"></div>
+        <div className="relative z-10 flex flex-col items-center text-center max-w-md px-4">
+          <div className="w-20 h-20 bg-white dark:bg-zinc-900 rounded-2xl flex items-center justify-center mb-6 border border-zinc-200 shadow-xl shadow-zinc-200/50 dark:shadow-none dark:border-zinc-800 group">
+            <ShoppingBag className="w-8 h-8 text-zinc-400 group-hover:scale-110 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-all duration-300" />
+          </div>
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight mb-3">
+            No Items in Order
+          </h1>
+          <p className="text-muted-foreground mb-8 text-base">
+            Your cart is currently empty. Please add some meals before
+            proceeding to checkout.
+          </p>
+          <Button
+            asChild
+            className="rounded-xl bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-lg shadow-orange-500/20 dark:shadow-orange-500/20 hover:shadow-xl hover:shadow-orange-500/30 dark:hover:shadow-orange-500/30 hover:-translate-y-0.5 px-8 h-12 text-base font-semibold transition-all duration-300 border-0"
+          >
             <Link href="/cart">Back to Cart</Link>
           </Button>
         </div>
@@ -97,159 +115,199 @@ export default function OrderPage() {
   }
 
   return (
-    <div className="border-gray-200 dark:bg-gray-950">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8">Order Confirmation</h1>
+    <div className="min-h-screen bg-zinc-50/50 dark:bg-zinc-950/20 relative pb-20 overflow-hidden">
+      {/* Subtle Premium Glow */}
+      <div className="absolute top-0 right-0 w-full h-125 bg-linear-to-b from-zinc-200/50 to-transparent dark:from-zinc-800/30 pointer-events-none blur-3xl"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              <Card className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">Order Items</h2>
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex gap-4 border-b pb-4 last:border-b-0"
-                    >
-                      {item.imageUrl && (
-                        <div className="relative h-20 w-20 shrink-0">
-                          <Image
-                            src={item.imageUrl}
-                            alt={item.title}
-                            fill
-                            className="object-cover rounded"
-                          />
-                        </div>
-                      )}
-                      <div className="flex-1">
-                        <h3 className="font-semibold">{item.title}</h3>
-                        <p className="text-sm text-gray-600">
-                          Qty: {item.quantity}
-                        </p>
+      <div className="container mx-auto px-4 py-8 lg:py-12 max-w-6xl relative z-10">
+        {/* HEADER SECTION */}
+        <div className="flex items-center gap-4 mb-8 lg:mb-12">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-sm border border-zinc-200/50 dark:border-zinc-800/50 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all hover:-translate-x-1"
+            asChild
+          >
+            <Link href="/cart">
+              <ChevronLeft className="w-5 h-5" />
+            </Link>
+          </Button>
+          <h1 className="text-3xl lg:text-4xl font-black tracking-tight bg-clip-text text-transparent bg-linear-to-r from-zinc-900 to-zinc-500 dark:from-zinc-100 dark:to-zinc-500">
+            Checkout
+          </h1>
+          <div className="ml-auto flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-foreground px-4 py-1.5 rounded-full text-sm font-semibold">
+            <ShieldCheck className="w-4 h-4 text-zinc-500" /> Secure
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="lg:col-span-2 space-y-8">
+            {/* Order Items Review Block */}
+            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl">
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-3 tracking-tight">
+                Review Items
+              </h2>
+              <div className="space-y-4">
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex gap-4 p-4 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/50 border border-zinc-200/50 dark:border-zinc-800 items-center hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 group"
+                  >
+                    {item.imageUrl && (
+                      <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-zinc-200 dark:bg-zinc-900 rounded-lg">
+                        <Image
+                          src={item.imageUrl}
+                          alt={item.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
                       </div>
-                      <div className="text-right">
-                        <p className="font-bold">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </p>
-                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-base truncate">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        Qty:{" "}
+                        <span className="font-medium text-foreground">
+                          {item.quantity}
+                        </span>
+                      </p>
                     </div>
-                  ))}
-                </div>
-              </Card>
+                    <div className="text-right shrink-0">
+                      <p className="font-semibold text-lg text-foreground">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-              {/* Address Form */}
-              <Card className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">
-                  Delivery Address
-                </h2>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    form.handleSubmit();
+            {/* Address Form Block */}
+            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl relative">
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-3 tracking-tight">
+                Delivery Details
+              </h2>
+
+              <form
+                id="checkout-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  form.handleSubmit();
+                }}
+                className="space-y-6"
+              >
+                <form.Field
+                  name="address"
+                  validators={{
+                    onChange: ({ value }) => {
+                      if (!value) return "Delivery address is required";
+                    },
                   }}
-                  className="space-y-4"
-                >
-                  <form.Field
-                    name="address"
-                    validators={{
-                      onChange: ({ value }) => {
-                        if (!value) return "Address is required";
-                      },
-                    }}
-                    children={(field) => (
-                      <div className="space-y-2">
-                        <Label htmlFor="address">Street Address</Label>
+                  children={(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid;
+                    return (
+                      <div className="space-y-2 group/input">
+                        <Label
+                          htmlFor="address"
+                          className="flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors"
+                        >
+                          <MapPin className="w-4 h-4 text-muted-foreground transition-colors" />
+                          Street Address
+                        </Label>
                         <Input
                           id="address"
                           name="address"
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
-                          placeholder="123 Main Street"
+                          placeholder="e.g. 123 Main Street, Apt 4B"
+                          className="h-12 rounded-xl bg-zinc-50 dark:bg-zinc-950/50 border-zinc-200 dark:border-zinc-800 focus-visible:ring-zinc-500 transition-shadow shadow-xs focus-visible:shadow-sm text-base"
                           required
                         />
-                        {field.state.meta.errors && (
-                          <p className="text-sm text-red-500">
+                        {isInvalid && (
+                          <p className="text-sm font-medium text-red-500 mt-1">
                             {field.state.meta.errors[0]}
                           </p>
                         )}
                       </div>
-                    )}
-                  />
+                    );
+                  }}
+                />
+              </form>
 
-                  <div className="flex gap-4 pt-4">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      asChild
-                      className="flex-1"
-                    >
-                      <Link href="/cart">Back to Checkout</Link>
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={isLoading}
-                      className="flex-1 bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
-                    >
-                      {isLoading ? (
-                        <div className="flex items-center gap-2">
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Redirecting to Payment...
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2">
-                          <CreditCard className="w-4 h-4" />
-                          Pay ${totalPrice.toFixed(2)}
-                        </div>
-                      )}
-                    </Button>
-                  </div>
-                </form>
-              </Card>
-
-              {/* Stripe security notice */}
-              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 px-2">
-                <ShieldCheck className="w-4 h-4 text-green-500" />
-                <span>
-                  Payments are securely processed by Stripe. Your card details
-                  are never stored on our servers.
-                </span>
+              {/* Stripe security notice inside the block */}
+              <div className="mt-8 p-4 bg-zinc-50 dark:bg-zinc-950/50 rounded-xl border border-zinc-100 dark:border-zinc-800 flex items-start gap-3">
+                <ShieldCheck className="w-5 h-5 text-zinc-500 shrink-0 mt-0.5" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Payments are securely processed by Stripe. Your sensitive card
+                  details are fully encrypted and never stored on our servers.
+                </p>
               </div>
             </div>
+          </div>
 
-            <div className="lg:col-span-1">
-              <Card className="p-6 sticky top-20">
-                <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+          <div className="lg:col-span-1">
+            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl lg:sticky lg:top-32 relative">
+              <h3 className="text-xl font-bold mb-6 tracking-tight">
+                Order Total
+              </h3>
 
-                <div className="space-y-3 mb-6 pb-6 border-b">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm">
-                      <span>
-                        {item.title} x{item.quantity}
-                      </span>
-                      <span className="font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </span>
-                    </div>
-                  ))}
+              <div className="space-y-4 mb-6 pb-6 border-b border-zinc-100 dark:border-zinc-800">
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex justify-between text-sm text-muted-foreground"
+                  >
+                    <span className="truncate pr-4">
+                      {item.quantity}x {item.title}
+                    </span>
+                    <span className="shrink-0 text-foreground font-medium">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4 mb-8 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-foreground font-medium">
+                    ${totalPrice.toFixed(2)}
+                  </span>
                 </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Subtotal</span>
-                    <span>${totalPrice.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Delivery</span>
-                    <span>$0.00</span>
-                  </div>
-                  <div className="flex justify-between text-lg font-bold pt-2 border-t">
-                    <span>Total</span>
-                    <span>${totalPrice.toFixed(2)}</span>
-                  </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Delivery</span>
+                  <span className="text-foreground font-medium">Free</span>
                 </div>
-              </Card>
+                <div className="flex justify-between text-xl font-bold pt-5 mt-5 border-t border-zinc-100 dark:border-zinc-800">
+                  <span>Total</span>
+                  <span className="text-foreground">
+                    ${totalPrice.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                form="checkout-form"
+                disabled={isLoading || items.length === 0}
+                className="w-full h-12 rounded-xl bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-md shadow-orange-500/20 dark:shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 dark:hover:shadow-orange-500/30 hover:-translate-y-0.5 font-semibold text-base transition-all duration-300 mt-4 group border-0"
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Processing...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 justify-center w-full">
+                    <CreditCard className="w-5 h-5" />
+                    Pay ${totalPrice.toFixed(2)}
+                  </div>
+                )}
+              </Button>
             </div>
           </div>
         </div>

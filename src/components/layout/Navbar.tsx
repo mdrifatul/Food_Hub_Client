@@ -103,25 +103,32 @@ const Navbar = ({
   };
 
   return (
-    <section className={cn("py-4 dark:bg-gray-950", className)}>
-      <div className="w-11/12 mx-auto">
+    <section
+      className={cn(
+        "sticky top-0 z-50 w-full backdrop-blur-xl bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50 supports-backdrop-filter:bg-white/60 dark:supports-backdrop-filter:bg-zinc-950/60 shadow-xs transition-all",
+        className,
+      )}
+    >
+      <div className="w-11/12 mx-auto py-3.5">
         <nav className="hidden items-center justify-between lg:flex">
-          <div className="flex items-center gap-6">
-            <a href={logo.url} className="flex items-center gap-2">
-              <span className="text-2xl font-semibold tracking-tighter text-orange-600">
-                {logo.title}
+          <div className="flex items-center gap-8">
+            <a href={logo.url} className="flex items-center gap-2.5 group">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-red-600 text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
+                <Store className="size-5" />
+              </div>
+              <span className="text-xl font-black tracking-widest bg-linear-to-r from-orange-500 to-red-600 bg-clip-text text-transparent drop-shadow-sm">
+                FOODHUB
               </span>
             </a>
-            <h1></h1>
-            <div className="flex items-center ">
+            <div className="hidden lg:flex items-center">
               <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="gap-2">
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-3 items-center">
             <ModeToggle />
 
             {isLoggedIn ? (
@@ -129,7 +136,7 @@ const Navbar = ({
                 {userRole === "USER" && (
                   <Button
                     asChild
-                    className="bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
+                    className="rounded-full bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white shadow-sm font-semibold h-10 px-5 transition-all"
                   >
                     <Link href="/providerForm">
                       <span>Create Provider Account</span>
@@ -139,13 +146,13 @@ const Navbar = ({
                 <Button
                   variant="outline"
                   size="icon"
-                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 relative"
+                  className="h-10 w-10 rounded-full border-zinc-200/50 bg-white/50 text-zinc-700 hover:bg-zinc-100 hover:text-foreground dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-all shadow-sm shrink-0"
                   asChild
                 >
-                  <Link href="/cart" className="relative">
-                    <ShoppingCart className="h-5 w-5" />
+                  <Link href="/cart" className="relative group">
+                    <ShoppingCart className="h-[1.15rem] w-[1.15rem] group-hover:scale-110 transition-transform" />
                     {totalItems > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg">
+                      <span className="absolute -top-1 -right-1 bg-linear-to-r from-orange-500 to-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-md ring-2 ring-white dark:ring-zinc-950">
                         {totalItems > 99 ? "99+" : totalItems}
                       </span>
                     )}
@@ -157,32 +164,47 @@ const Navbar = ({
                     <Button
                       variant="outline"
                       size="icon"
-                      className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95"
+                      className="h-10 w-10 rounded-full border-zinc-200/50 bg-white/50 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-all shadow-sm shrink-0"
                     >
-                      <User className="h-5 w-5" />
+                      <User className="h-[1.15rem] w-[1.15rem]" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <DropdownMenuLabel>
-                      {userName ? `${userName}` : "My Account"}
+                  <DropdownMenuContent
+                    align="end"
+                    className="w-64 rounded-2xl border-zinc-200/50 dark:border-zinc-800/50 shadow-xl overflow-hidden p-1.5 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl supports-backdrop-filter:bg-white/60 dark:supports-backdrop-filter:bg-zinc-950/60"
+                  >
+                    <DropdownMenuLabel className="font-bold py-3 px-3 text-sm flex items-center gap-3 rounded-xl m-0.5 bg-zinc-50 dark:bg-zinc-900/50">
+                      <div className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 w-9 h-9 rounded-full flex items-center justify-center shrink-0 border border-zinc-200 dark:border-zinc-700">
+                        <User className="h-[1.15rem] w-[1.15rem]" />
+                      </div>
+                      <div className="flex flex-col overflow-hidden">
+                        <span className="leading-tight mb-0.5 truncate text-foreground">
+                          {userName ? `${userName}` : "My Account"}
+                        </span>
+                        <span className="text-[10px] font-bold text-muted-foreground leading-none uppercase tracking-wider">
+                          {userRole || "Guest"}
+                        </span>
+                      </div>
                     </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
+                    <DropdownMenuSeparator className="bg-zinc-100 dark:bg-zinc-800/80 mx-2 my-1" />
+                    <DropdownMenuItem
+                      asChild
+                      className="p-3 mx-1 my-1 rounded-xl cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:bg-zinc-100 dark:focus:bg-zinc-800 focus:text-foreground font-medium transition-colors"
+                    >
                       <Link
                         href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`}
-                        className="cursor-pointer"
                       >
-                        <Settings className="mr-2 h-4 w-4" />
+                        <Settings className="mr-3 h-4 w-4" />
                         <span>Dashboard</span>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
+                    <DropdownMenuSeparator className="bg-zinc-100 dark:bg-zinc-800/80 mx-2 my-1" />
                     <DropdownMenuItem
                       onClick={handleLogout}
-                      className="cursor-pointer text-red-600 focus:text-red-600"
+                      className="p-3 mx-1 my-1 rounded-xl cursor-pointer text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 focus:bg-red-50 dark:focus:bg-red-950/50 focus:text-red-700 dark:focus:text-red-300 font-medium transition-colors"
                     >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      <span>Logout</span>
+                      <LogOut className="mr-3 h-4 w-4" />
+                      <span>Logout Workspace</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -191,16 +213,15 @@ const Navbar = ({
               <>
                 <Button
                   asChild
-                  variant="outline"
-                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                  variant="ghost"
+                  className="rounded-full text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 font-semibold px-6 transition-all"
                 >
                   <a href={auth.login.url}>{auth.login.title}</a>
                 </Button>
 
                 <Button
                   asChild
-                  variant="outline"
-                  className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                  className="rounded-full bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-md shadow-orange-500/20 dark:shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 font-bold px-6 border-0 transition-all duration-300"
                 >
                   <a href={auth.signup.url}>{auth.signup.title}</a>
                 </Button>
@@ -214,22 +235,35 @@ const Navbar = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <span className="text-2xl font-semibold tracking-tighter text-orange-600">
-                {logo.title}
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-red-600 text-white shadow-md shadow-orange-500/20">
+                <Store className="size-4" />
+              </div>
+              <span className="text-xl font-black tracking-widest bg-linear-to-r from-orange-500 to-red-600 bg-clip-text text-transparent drop-shadow-sm">
+                FOODHUB
               </span>
             </a>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-zinc-200/50 bg-white/50 dark:border-zinc-800/50 dark:bg-zinc-900/50 shadow-sm rounded-xl"
+                >
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="overflow-y-auto">
+              <SheetContent className="overflow-y-auto border-zinc-200/50 dark:border-zinc-800/50 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl supports-backdrop-filter:bg-white/80 dark:supports-backdrop-filter:bg-zinc-950/80">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
-                      <span className="text-2xl font-semibold tracking-tighter text-orange-600">
-                        {logo.title}
+                    <a
+                      href={logo.url}
+                      className="flex items-center justify-center gap-2 pb-4"
+                    >
+                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-linear-to-br from-orange-500 to-red-600 text-white shadow-md shadow-orange-500/20">
+                        <Store className="size-4" />
+                      </div>
+                      <span className="text-2xl font-black tracking-widest bg-linear-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+                        FOODHUB
                       </span>
                     </a>
                   </SheetTitle>
@@ -244,20 +278,25 @@ const Navbar = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <ModeToggle />
+                    <div className="flex justify-between items-center px-1 mb-2">
+                      <span className="font-semibold text-sm text-muted-foreground">
+                        Appearance
+                      </span>
+                      <ModeToggle />
+                    </div>
 
                     {isLoggedIn ? (
                       <>
                         <Button
                           variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 relative w-full justify-start"
+                          className="rounded-xl border-zinc-200 text-foreground hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800/80 relative w-full justify-start h-12"
                           asChild
                         >
                           <Link href="/cart" className="relative">
-                            <ShoppingCart className="h-5 w-5 mr-2" />
-                            <span>Cart</span>
+                            <ShoppingCart className="h-5 w-5 mr-3 text-zinc-500" />
+                            <span className="font-semibold">Cart</span>
                             {totalItems > 0 && (
-                              <span className="ml-auto bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-lg">
+                              <span className="ml-auto bg-linear-to-r from-orange-500 to-red-600 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-lg shadow-orange-500/20">
                                 {totalItems > 99 ? "99+" : totalItems}
                               </span>
                             )}
@@ -266,34 +305,36 @@ const Navbar = ({
 
                         <Button
                           variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-600/95 w-full justify-start"
+                          className="rounded-xl border-zinc-200 text-foreground hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800/80 w-full justify-start h-12"
                           asChild
                         >
                           <Link
                             href={`/${userRole === "ADMIN" ? "admin-dashboard" : userRole === "PROVIDER" ? "provider-dashboard" : "dashboard"}`}
                           >
-                            <Settings className="h-5 w-5 mr-2" />
-                            Dashboard
+                            <Settings className="h-5 w-5 mr-3 text-zinc-500" />
+                            <span className="font-semibold">Dashboard</span>
                           </Link>
                         </Button>
                         <Button
                           variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50 w-full justify-start"
+                          className="rounded-xl border-zinc-200 text-foreground hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800/80 w-full justify-start h-12"
                           asChild
                         >
                           <Link href="/providerForm">
-                            <Store className="mr-4 h-4 w-4" />
-                            <span>Provider Account</span>
+                            <Store className="h-5 w-5 mr-3 text-zinc-500" />
+                            <span className="font-semibold">
+                              Provider Account
+                            </span>
                           </Link>
                         </Button>
 
                         <Button
                           onClick={handleLogout}
                           variant="outline"
-                          className="border-red-500 text-red-500 hover:bg-red-50 dark:border-red-600 dark:text-red-400 dark:hover:bg-red-950/50 w-full justify-start"
+                          className="rounded-xl border-red-200 text-red-600 hover:bg-red-50 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/50 w-full justify-start h-12 mt-2"
                         >
-                          <LogOut className="h-5 w-5 mr-2" />
-                          Logout
+                          <LogOut className="h-5 w-5 mr-3" />
+                          <span className="font-semibold">Logout</span>
                         </Button>
                       </>
                     ) : (
@@ -301,15 +342,14 @@ const Navbar = ({
                         <Button
                           asChild
                           variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                          className="rounded-xl border-zinc-200 text-foreground hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-800/80 h-12 font-semibold"
                         >
                           <a href={auth.login.url}>{auth.login.title}</a>
                         </Button>
 
                         <Button
                           asChild
-                          variant="outline"
-                          className="border-orange-500 text-orange-500 hover:bg-orange-50 dark:border-orange-600 dark:text-orange-400 dark:hover:bg-orange-950/50"
+                          className="rounded-xl bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-md shadow-orange-500/20 dark:shadow-orange-500/10 hover:shadow-lg hover:shadow-orange-500/30 font-bold border-0 h-12 transition-all"
                         >
                           <a href={auth.signup.url}>{auth.signup.title}</a>
                         </Button>
@@ -331,7 +371,7 @@ const renderMenuItem = (item: MenuItem) => {
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
         href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground dark:bg-gray-950"
+        className="group inline-flex h-10 w-max items-center justify-center rounded-full bg-transparent px-4 py-2 text-sm font-semibold transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/80 text-foreground"
       >
         {item.title}
       </NavigationMenuLink>
@@ -341,7 +381,11 @@ const renderMenuItem = (item: MenuItem) => {
 
 const renderMobileMenuItem = (item: MenuItem) => {
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
+    <a
+      key={item.title}
+      href={item.url}
+      className="text-lg font-semibold text-foreground hover:text-orange-600 dark:hover:text-orange-500 transition-colors px-2 py-1"
+    >
       {item.title}
     </a>
   );
