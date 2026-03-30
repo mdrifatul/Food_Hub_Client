@@ -1,5 +1,6 @@
 // components/sections/why-choose-section.tsx
 import { Award, Clock, Heart, Shield, Utensils, Zap } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function WhyChooseSection() {
   return (
@@ -9,7 +10,7 @@ export default function WhyChooseSection() {
         <div className="absolute inset-x-0 -top-24 h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
         {/* Header */}
-        <div className="text-center mb-16 space-y-3 relative z-10">
+        <ScrollReveal direction="down" className="text-center mb-16 space-y-3 relative z-10">
           <span className="inline-block py-1 px-4 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-widest uppercase mb-1 border border-orange-200 dark:border-orange-500/20 shadow-xs">
             The FoodHub Advantage
           </span>
@@ -24,12 +25,12 @@ export default function WhyChooseSection() {
             with quality, speed, and premium convenience baked into every single
             order.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* BENTO Grid Architecture */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative z-10">
           {/* Bento Block 1: Fast Delivery (Large Horizontal) */}
-          <div className="md:col-span-2 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col justify-end min-h-60">
+          <ScrollReveal direction="left" delay={0.1} className="md:col-span-2 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col justify-end min-h-60">
             <div className="absolute top-0 right-0 p-6 opacity-[0.03] dark:opacity-5 group-hover:opacity-10 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-12 translate-x-8 -translate-y-8">
               <Clock className="w-48 h-48 text-orange-500 pointer-events-none" />
             </div>
@@ -50,10 +51,10 @@ export default function WhyChooseSection() {
                 fastest route to your doorstep, every single time.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Block 2: Safe & Hygienic (Vertical/Square) */}
-          <div className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col justify-between min-h-60">
+          <ScrollReveal direction="right" delay={0.2} className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col justify-between min-h-60">
             <div className="absolute -right-6 -bottom-6 opacity-[0.08] dark:opacity-10 group-hover:opacity-[0.15] transition-all duration-500 group-hover:scale-110 pointer-events-none">
               <Shield className="w-32 h-32 text-cyan-500" />
             </div>
@@ -69,10 +70,10 @@ export default function WhyChooseSection() {
                 protocols to guarantee perfectly safe packaging.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Block 3: Wide Variety (Square) */}
-          <div className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-60 flex flex-col justify-center">
+          <ScrollReveal direction="up" delay={0.3} className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-60 flex flex-col justify-center">
             <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-purple-400 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative z-10 flex flex-col h-full justify-center">
               <div className="w-12 h-12 mb-5 rounded-xl bg-linear-to-br from-purple-400 to-pink-500 flex items-center justify-center shadow-lg group-hover:-rotate-12 transition-transform duration-500 text-white">
@@ -86,10 +87,10 @@ export default function WhyChooseSection() {
                 incredibly delicious meals.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Block 4: Quality Assured (Square Centered) */}
-          <div className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden text-center flex flex-col items-center justify-center min-h-60">
+          <ScrollReveal direction="up" delay={0.4} className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden text-center flex flex-col items-center justify-center min-h-60">
             <div className="absolute inset-0 bg-linear-to-b from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="relative z-10">
               <div className="w-12 h-12 mx-auto mb-5 rounded-full bg-linear-to-br from-rose-400 to-red-500 flex items-center justify-center shadow-lg shadow-rose-500/20 group-hover:scale-125 transition-transform duration-500 text-white">
@@ -103,10 +104,10 @@ export default function WhyChooseSection() {
                 reaches you every time.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Block 5: Easy Ordering (Square Offset) */}
-          <div className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-60">
+          <ScrollReveal direction="up" delay={0.5} className="md:col-span-1 group relative bg-white dark:bg-zinc-900/60 rounded-3xl p-6 md:p-8 hover:shadow-xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 overflow-hidden min-h-60">
             <div className="absolute bottom-0 left-0 w-full h-1/2 bg-linear-to-t from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="relative z-10 h-full flex flex-col justify-end">
               <div className="w-12 h-12 mb-5 rounded-xl bg-linear-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg group-hover:-translate-y-2 transition-transform duration-500 text-white">
@@ -120,10 +121,10 @@ export default function WhyChooseSection() {
                 feel like absolute magic.
               </p>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Bento Block 6: Best Prices (Full Width Bottom Hero Banner) */}
-          <div className="md:col-span-3 group relative bg-zinc-950 rounded-3xl p-6 md:p-10 hover:shadow-xl transition-all duration-700 border border-zinc-800 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 mt-1 lg:mt-0">
+          <ScrollReveal direction="up" delay={0.6} className="md:col-span-3 group relative bg-zinc-950 rounded-3xl p-6 md:p-10 hover:shadow-xl transition-all duration-700 border border-zinc-800 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 mt-1 lg:mt-0">
             {/* Dynamic background effect */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_right_center,rgba(16,185,129,0.15),transparent_60%)] opacity-50 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
@@ -156,7 +157,7 @@ export default function WhyChooseSection() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

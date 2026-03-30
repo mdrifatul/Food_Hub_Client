@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function CTASection() {
   return (
@@ -17,7 +18,7 @@ export default function CTASection() {
           <div className="absolute bottom-0 left-0 translate-y-1/3 w-64 h-64 bg-orange-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
           {/* Core Content */}
-          <div className="relative z-10 max-w-3xl mx-auto space-y-8">
+          <ScrollReveal direction="up" className="relative z-10 max-w-3xl mx-auto space-y-8">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
               Ready to satisfy your{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-500">
@@ -51,7 +52,7 @@ export default function CTASection() {
                 </Link>
               </Button>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Badge */}
           <div className="absolute top-8 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/50 backdrop-blur-md">

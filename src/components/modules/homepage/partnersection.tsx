@@ -9,6 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const partnerBenefits = [
   {
@@ -56,7 +57,7 @@ export default function PartnerSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
+        <ScrollReveal direction="down" className="text-center mb-16 space-y-4">
           <span className="inline-block py-1.5 px-5 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-widest uppercase border border-orange-200 dark:border-orange-500/20 shadow-xs">
             For Restaurants
           </span>
@@ -69,10 +70,10 @@ export default function PartnerSection() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-2 font-medium">
             Join hundreds of successful restaurants and multiply your daily revenue with Bangladesh's fastest-growing food delivery network.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Core Partnership Hero Block - Massive split container */}
-        <div className="relative w-full rounded-[2.5rem] bg-zinc-950 border border-zinc-900 shadow-2xl mb-20 overflow-hidden flex flex-col lg:flex-row group">
+        <ScrollReveal direction="up" delay={0.2} className="relative w-full rounded-[2.5rem] bg-zinc-950 border border-zinc-900 shadow-2xl mb-20 overflow-hidden flex flex-col lg:flex-row group">
            
            {/* Left Dark Content */}
            <div className="relative z-10 w-full lg:w-1/2 p-10 md:p-14 lg:p-16 flex flex-col justify-center">
@@ -125,37 +126,37 @@ export default function PartnerSection() {
                  </div>
               </div>
            </div>
-        </div>
+        </ScrollReveal>
 
         {/* Benefits Section Label */}
-        <div className="text-center mb-10">
+        <ScrollReveal direction="up" className="text-center mb-10">
             <h3 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">Why Restaurants Transition to Us</h3>
-        </div>
+        </ScrollReveal>
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
            {partnerBenefits.map((benefit, index) => (
-             <div key={index} className="group bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+             <ScrollReveal delay={index * 0.1} key={index} className="group h-full bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-[2rem] p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="w-14 h-14 bg-orange-50 dark:bg-orange-500/10 rounded-2xl flex items-center justify-center border border-orange-100 dark:border-orange-500/20 mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
                    <benefit.icon className="w-6 h-6 text-orange-500" />
                 </div>
                 <h4 className="text-xl font-bold text-foreground mb-3">{benefit.title}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed font-medium">{benefit.description}</p>
-             </div>
+             </ScrollReveal>
            ))}
         </div>
 
         {/* Minimal High-Impact Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-zinc-200 dark:divide-zinc-800/60">
            {stats.map((stat, index) => (
-             <div key={index} className="text-center md:px-4 group cursor-default">
+             <ScrollReveal direction="up" delay={index * 0.1} key={index} className="text-center md:px-4 group cursor-default">
                <p className="text-4xl md:text-5xl lg:text-6xl font-black bg-linear-to-b from-orange-400 to-red-600 bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-sm">
                  {stat.value}
                </p>
                <p className="text-xs md:text-sm font-bold tracking-widest text-muted-foreground uppercase">
                  {stat.label}
                </p>
-             </div>
+             </ScrollReveal>
            ))}
         </div>
 

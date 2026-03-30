@@ -2,6 +2,7 @@ import { getAllCategories } from "@/action/category.action";
 import { CategoryList } from "@/components/layout/category-list";
 import { CreateCategoryForm } from "@/components/layout/create-category-form";
 import { Layers } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +12,7 @@ export default async function CategoriesPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       {/* Premium Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+      <ScrollReveal direction="down" className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <div className="flex items-center gap-3 mb-1">
             <div className="p-2 bg-primary/10 rounded-lg text-primary">
@@ -36,18 +37,18 @@ export default async function CategoriesPage() {
             {categories?.length || 0} Active Categories
           </span>
         </div>
-      </div>
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Form Column - Sticky */}
-        <div className="lg:col-span-4 lg:sticky lg:top-6">
+        <ScrollReveal direction="left" delay={0.1} className="lg:col-span-4 lg:sticky lg:top-6">
           <CreateCategoryForm />
-        </div>
+        </ScrollReveal>
 
         {/* Table Column */}
-        <div className="lg:col-span-8">
+        <ScrollReveal direction="right" delay={0.2} className="lg:col-span-8">
           <CategoryList categories={categories || []} />
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

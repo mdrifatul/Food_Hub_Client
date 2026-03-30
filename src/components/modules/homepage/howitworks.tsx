@@ -1,5 +1,6 @@
 // components/sections/how-it-works-section.tsx
 import { ArrowRight, MapPin, Search, ShoppingBag } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const steps = [
   {
@@ -42,7 +43,7 @@ export default function HowItWorksSection() {
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/3 w-96 h-96 bg-red-400/10 dark:bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <ScrollReveal direction="down" className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <span className="inline-block py-1.5 px-4 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-wider uppercase mb-2 border border-orange-200 dark:border-orange-500/20 shadow-sm">
             Simple Process
           </span>
@@ -56,7 +57,7 @@ export default function HowItWorksSection() {
             No complicated signups or endless waiting. Just a few taps and your
             favorite food is on its way to you.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-12 relative">
           {/* Animated Connecting SVG Line (desktop only) */}
@@ -65,8 +66,10 @@ export default function HowItWorksSection() {
           </div>
 
           {steps.map((step, index) => (
-            <div
+            <ScrollReveal
               key={step.id}
+              direction="up"
+              delay={index * 0.15}
               className="relative z-10 flex flex-col items-center group"
             >
               {/* Step indicator */}
@@ -104,7 +107,7 @@ export default function HowItWorksSection() {
               {index !== 2 && (
                 <ArrowRight className="w-6 h-6 text-zinc-300 dark:text-zinc-700 mt-8 md:hidden" />
               )}
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

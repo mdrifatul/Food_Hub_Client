@@ -1,6 +1,7 @@
 // components/sections/hero-section.tsx
 import { Bike, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function HeroSection() {
   return (
@@ -14,7 +15,7 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
-          <div className="space-y-8 relative z-10 w-full max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+          <ScrollReveal direction="right" className="space-y-8 relative z-10 w-full max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 text-orange-600 dark:text-orange-400 text-sm font-semibold mb-2 w-fit mx-auto lg:mx-0 shadow-sm">
               <Bike className="w-4 h-4" />
               <span>Lightning Fast Delivery in 20 mins!</span>
@@ -35,10 +36,10 @@ export default function HeroSection() {
               restaurants, explore diverse menus, and get your favorite meals
               delivered blazing fast.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Right Content - Visuals */}
-          <div className="relative mt-16 lg:mt-0 lg:h-150 flex items-center justify-center pointer-events-none">
+          <ScrollReveal direction="left" delay={0.2} className="relative mt-16 lg:mt-0 lg:h-150 flex items-center justify-center pointer-events-none">
             {/* Decorative Rings */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-85 h-85 md:w-120 md:h-120 border-2 border-dashed border-orange-200 dark:border-orange-900/40 rounded-full animate-[spin_60s_linear_infinite]" />
 
@@ -98,7 +99,7 @@ export default function HeroSection() {
                 </p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

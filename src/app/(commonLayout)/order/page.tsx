@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -92,7 +93,7 @@ export default function OrderPage() {
     return (
       <div className="min-h-[75vh] flex flex-col items-center justify-center bg-transparent relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-zinc-200/50 dark:bg-zinc-800/30 blur-[100px] rounded-full pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col items-center text-center max-w-md px-4">
+        <ScrollReveal direction="up" className="relative z-10 flex flex-col items-center text-center max-w-md px-4">
           <div className="w-20 h-20 bg-white dark:bg-zinc-900 rounded-2xl flex items-center justify-center mb-6 border border-zinc-200 shadow-xl shadow-zinc-200/50 dark:shadow-none dark:border-zinc-800 group">
             <ShoppingBag className="w-8 h-8 text-zinc-400 group-hover:scale-110 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-all duration-300" />
           </div>
@@ -109,7 +110,7 @@ export default function OrderPage() {
           >
             <Link href="/cart">Back to Cart</Link>
           </Button>
-        </div>
+        </ScrollReveal>
       </div>
     );
   }
@@ -121,7 +122,7 @@ export default function OrderPage() {
 
       <div className="container mx-auto px-4 py-8 lg:py-12 max-w-6xl relative z-10">
         {/* HEADER SECTION */}
-        <div className="flex items-center gap-4 mb-8 lg:mb-12">
+        <ScrollReveal direction="down" className="flex items-center gap-4 mb-8 lg:mb-12">
           <Button
             variant="ghost"
             size="icon"
@@ -138,12 +139,12 @@ export default function OrderPage() {
           <div className="ml-auto flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-foreground px-4 py-1.5 rounded-full text-sm font-semibold">
             <ShieldCheck className="w-4 h-4 text-zinc-500" /> Secure
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           <div className="lg:col-span-2 space-y-8">
             {/* Order Items Review Block */}
-            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl">
+            <ScrollReveal direction="left" delay={0.1} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-3 tracking-tight">
                 Review Items
               </h2>
@@ -182,10 +183,10 @@ export default function OrderPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Address Form Block */}
-            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl relative">
+            <ScrollReveal direction="left" delay={0.2} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl relative">
               <h2 className="text-xl font-bold mb-6 flex items-center gap-3 tracking-tight">
                 Delivery Details
               </h2>
@@ -246,11 +247,11 @@ export default function OrderPage() {
                   details are fully encrypted and never stored on our servers.
                 </p>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl lg:sticky lg:top-32 relative">
+            <ScrollReveal direction="right" delay={0.3} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl lg:sticky lg:top-32 relative">
               <h3 className="text-xl font-bold mb-6 tracking-tight">
                 Order Total
               </h3>
@@ -308,7 +309,7 @@ export default function OrderPage() {
                   </div>
                 )}
               </Button>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { FoodCard } from "@/components/ui/food-card";
 import { MealPost } from "@/types";
 import { MealsSectionProps } from "./../../../app/(commonLayout)/page";
 import MealsFilters from "./meals-filters";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default async function MealsSection({
   searchParams,
@@ -51,7 +52,7 @@ export default async function MealsSection({
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full bg-[radial-gradient(ellipse_at_center,rgba(249,115,22,0.06),transparent_60%)] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 space-y-4">
+        <ScrollReveal direction="down" className="text-center mb-16 space-y-4">
           <span className="inline-block py-1.5 px-5 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold tracking-widest uppercase border border-orange-200 dark:border-orange-500/20 shadow-xs">
             Signature Menu
           </span>
@@ -64,10 +65,10 @@ export default async function MealsSection({
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-2 font-medium">
             Hand-picked selections crafted by top local chefs, guaranteed to satisfy your deepest cravings in minutes.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Filter Container */}
-        <div className="mb-20">
+        <ScrollReveal direction="up" delay={0.1} className="mb-20">
            <MealsFilters
              cuisines={cuisines}
              dietaryOptions={dietaryOptions}
@@ -75,14 +76,14 @@ export default async function MealsSection({
              selectedDietary={searchParams?.dietaryPreferences}
              selectedPrice={searchParams?.price}
            />
-        </div>
+        </ScrollReveal>
 
         {filteredMeals.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
-            {filteredMeals.map((meal: MealPost) => (
-              <div key={meal.id} className="flex justify-center h-full">
+            {filteredMeals.map((meal: MealPost, index: number) => (
+              <ScrollReveal delay={index * 0.1} key={meal.id} className="flex justify-center h-full">
                 <FoodCard meal={meal} />
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         ) : (
