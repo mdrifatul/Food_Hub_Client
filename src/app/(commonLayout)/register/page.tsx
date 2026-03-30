@@ -1,4 +1,10 @@
 import { RegisterForm } from "@/components/modules/authentication/register-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Register | FoodHub",
+  description: "Create a new FoodHub account",
+};
 
 export default function Page() {
   return (

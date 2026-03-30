@@ -1,6 +1,12 @@
 import { ProviderRegistrationForm } from "@/components/layout/ProviderRegistrationForm";
 import { userService } from "@/services/user.service";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Become a Provider | FoodHub",
+  description: "Register your restaurant on FoodHub",
+};
 
 export default async function ProviderFormPage() {
   const sessionResult = await userService.getSession();

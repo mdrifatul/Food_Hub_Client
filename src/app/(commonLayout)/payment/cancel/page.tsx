@@ -4,8 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { XCircle } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function PaymentCancelPage() {
+  useEffect(() => {
+    document.title = "Payment Cancelled | FoodHub";
+  }, []);
+
   return (
     <div className="border-gray-200 dark:bg-gray-950">
       <div className="container mx-auto px-4 py-16">

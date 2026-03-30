@@ -40,6 +40,7 @@ import {
 
 import { useCart } from "@/context/CartContext";
 import { authClient } from "@/lib/auth-client";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ModeToggle } from "./ModeToggle";
@@ -103,7 +104,10 @@ const Navbar = ({
   };
 
   return (
-    <section
+    <motion.section
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={cn(
         "sticky top-0 z-50 w-full backdrop-blur-xl bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200/50 dark:border-zinc-800/50 supports-backdrop-filter:bg-white/60 dark:supports-backdrop-filter:bg-zinc-950/60 shadow-xs transition-all",
         className,
@@ -362,7 +366,7 @@ const Navbar = ({
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

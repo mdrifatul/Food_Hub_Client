@@ -1,9 +1,18 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-background relative overflow-hidden">
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
+      className="border-t border-border bg-background relative overflow-hidden"
+    >
       {/* Super subtle modern glow */}
       <div className="absolute top-0 right-1/4 w-lg h-lg bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -158,6 +167,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

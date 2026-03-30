@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { useCart } from "@/lib/user-cart";
 import {
   ArrowRight,
@@ -12,17 +13,24 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { useEffect } from "react";
 
 export default function CartPage() {
   const { items, removeItem, totalPrice } = useCart();
+
+  useEffect(() => {
+    document.title = "Shopping Cart | FoodHub";
+  }, []);
 
   // EMPTY STATE
   if (items.length === 0) {
     return (
       <div className="min-h-[75vh] flex flex-col items-center justify-center bg-transparent relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-zinc-200/50 dark:bg-zinc-800/30 blur-[100px] rounded-full pointer-events-none"></div>
-        <ScrollReveal direction="up" className="relative z-10 flex flex-col items-center text-center max-w-md px-4">
+        <ScrollReveal
+          direction="up"
+          className="relative z-10 flex flex-col items-center text-center max-w-md px-4"
+        >
           <div className="w-20 h-20 bg-white dark:bg-zinc-900 rounded-2xl flex items-center justify-center mb-6 border border-zinc-200 shadow-xl shadow-zinc-200/50 dark:shadow-none dark:border-zinc-800 group">
             <ShoppingBag className="w-8 h-8 text-zinc-400 group-hover:scale-110 group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-all duration-300" />
           </div>
@@ -52,7 +60,10 @@ export default function CartPage() {
 
       <div className="container mx-auto px-4 py-8 lg:py-12 max-w-6xl relative z-10">
         {/* HEADER SECTION */}
-        <ScrollReveal direction="down" className="flex items-center gap-4 mb-8 lg:mb-12">
+        <ScrollReveal
+          direction="down"
+          className="flex items-center gap-4 mb-8 lg:mb-12"
+        >
           <Button
             variant="ghost"
             size="icon"
@@ -74,7 +85,11 @@ export default function CartPage() {
         {/* 2-COLUMN GRID SYSTEM */}
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12 items-start">
           {/* CART ITEMS LIST (LEFT COLUMN) */}
-          <ScrollReveal direction="left" delay={0.1} className="lg:col-span-2 space-y-4 lg:space-y-6">
+          <ScrollReveal
+            direction="left"
+            delay={0.1}
+            className="lg:col-span-2 space-y-4 lg:space-y-6"
+          >
             {items.map((item) => (
               <div
                 key={item.id}
@@ -131,7 +146,11 @@ export default function CartPage() {
           </ScrollReveal>
 
           {/* ORDER SUMMARY SIDEBAR (RIGHT COLUMN) */}
-          <ScrollReveal direction="right" delay={0.2} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl lg:sticky lg:top-32 relative">
+          <ScrollReveal
+            direction="right"
+            delay={0.2}
+            className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl p-6 lg:p-8 shadow-xl lg:sticky lg:top-32 relative"
+          >
             <h2 className="text-xl font-bold mb-6 tracking-tight">
               Order Summary
             </h2>

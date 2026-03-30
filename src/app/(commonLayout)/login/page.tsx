@@ -1,4 +1,10 @@
 import { LoginForm } from "@/components/modules/authentication/login-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login | FoodHub",
+  description: "Sign in to your FoodHub account",
+};
 
 export default function Page() {
   return (
