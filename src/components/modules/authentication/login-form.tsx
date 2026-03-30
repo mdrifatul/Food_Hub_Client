@@ -72,10 +72,10 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl shadow-lg">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-foreground">Login to your account</CardTitle>
+          <CardDescription className="text-muted-foreground">
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
@@ -103,6 +103,7 @@ export function LoginForm({
                         name={field.name}
                         value={field.state.value}
                         onChange={(e) => field.handleChange(e.target.value)}
+                        className="bg-white dark:bg-zinc-800/50"
                       />
                       {isInvalid && (
                         <FieldError errors={field.state.meta.errors} />
@@ -126,6 +127,7 @@ export function LoginForm({
                         name={field.name}
                         value={field.state.value}
                         onChange={(e) => field.handleChange(e.target.value)}
+                        className="bg-white dark:bg-zinc-800/50"
                       />
 
                       {isInvalid && (
@@ -154,8 +156,8 @@ export function LoginForm({
           >
             Continue with Google
           </Button>
-          <FieldDescription className="text-center">
-            Don&apos;t have an account? <a href="/register">Register</a>
+          <FieldDescription className="text-center text-muted-foreground">
+            Don&apos;t have an account? <a href="/register" className="text-orange-500 hover:underline">Register</a>
           </FieldDescription>
         </CardFooter>
       </Card>

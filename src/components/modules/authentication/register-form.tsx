@@ -68,10 +68,10 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   });
 
   return (
-    <Card {...props}>
+    <Card {...props} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl shadow-lg">
       <CardHeader>
-        <CardTitle>Create an account</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-foreground">Create an account</CardTitle>
+        <CardDescription className="text-muted-foreground">
           Enter your information below to create your account
         </CardDescription>
       </CardHeader>
@@ -99,6 +99,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                       name={field.name}
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
+                      className="bg-white dark:bg-zinc-800/50"
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
@@ -122,6 +123,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                       name={field.name}
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
+                      className="bg-white dark:bg-zinc-800/50"
                     />
                     {isInvalid && (
                       <FieldError errors={field.state.meta.errors} />
@@ -145,6 +147,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                       name={field.name}
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
+                      className="bg-white dark:bg-zinc-800/50"
                     />
 
                     {isInvalid && (
@@ -173,8 +176,8 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         >
           Continue with Google
         </Button>
-        <FieldDescription className="px-6 text-center">
-          Already have an account? <a href="/login">Log In</a>
+        <FieldDescription className="px-6 text-center text-muted-foreground">
+          Already have an account? <a href="/login" className="text-orange-500 hover:underline">Log In</a>
         </FieldDescription>
       </CardFooter>
     </Card>
