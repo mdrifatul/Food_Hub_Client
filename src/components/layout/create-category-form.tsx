@@ -113,7 +113,7 @@ export function CreateCategoryForm() {
         <Button
           form="create-category-form"
           type="submit"
-          className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
+          className="w-full bg-linear-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white"
         >
           Add Category
         </Button>

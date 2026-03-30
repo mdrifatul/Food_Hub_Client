@@ -185,7 +185,7 @@ export function OrderManagementCard({
                 </div>
                 {item.meal?.price && (
                   <span className="font-bold text-zinc-600 dark:text-zinc-400 text-xs">
-                    ৳{(item.meal.price * item.quantity).toLocaleString()}
+                    ${(item.meal.price * item.quantity).toLocaleString()}
                   </span>
                 )}
               </div>
@@ -197,7 +197,7 @@ export function OrderManagementCard({
               Total Charged
             </span>
             <span className="font-black text-lg text-orange-600 dark:text-orange-400">
-              ৳{(order.totalPrice || 0).toLocaleString()}
+              ${(order.totalPrice || 0).toLocaleString()}
             </span>
           </div>
         </div>

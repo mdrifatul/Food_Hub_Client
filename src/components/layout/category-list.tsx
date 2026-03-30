@@ -13,6 +13,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -45,48 +53,63 @@ export function CategoryList({ categories }: CategoryListProps) {
     }
   };
 
-  return (
-    <div className="space-y-3">
-      {categories.map((category) => (
-        <div
-          key={category.id}
-          className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
-        >
-          <div className="flex-1">
-            <h3 className="font-semibold text-lg">{category.name}</h3>
-          </div>
+  if (categories.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8 text-center text-muted-foreground">
+        <p>No categories found.</p>
+        <p className="text-sm">Add a new category to get started.</p>
+      </div>
+    );
+  }
 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
-              >
-                <Trash2 className="h-5 w-5" />
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Delete Category</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Are you sure you want to delete "{category.name}"? This action
-                  cannot be undone.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={() => handleDelete(category.id, category.name)}
-                  className="bg-red-500 hover:bg-red-600"
-                >
-                  Delete
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
-      ))}
+  return (
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Category Name</TableHead>
+            <TableHead className="w-25 text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {categories.map((category) => (
+            <TableRow key={category.id}>
+              <TableCell className="font-medium">{category.name}</TableCell>
+              <TableCell className="text-right">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      <span className="sr-only">Delete</span>
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Delete Category</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you sure you want to delete "{category.name}"? This action cannot be undone.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => handleDelete(category.id, category.name)}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                      >
+                        Delete
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

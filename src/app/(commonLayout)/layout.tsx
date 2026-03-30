@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { userService } from "../../services/user.service";
+import { userService } from "@/services/user.service";
 
 export default async function HomeLayout({
   children,

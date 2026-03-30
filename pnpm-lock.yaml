@@ -38,6 +38,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      foodhub_client:
+        specifier: 'link:'
+        version: 'link:'
       lucide-react:
         specifier: ^0.563.0
         version: 0.563.0(react@19.2.3)

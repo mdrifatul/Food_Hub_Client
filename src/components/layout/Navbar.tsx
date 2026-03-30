@@ -95,8 +95,8 @@ const Navbar = ({
   userRole,
 }: Navbar1Props) => {
   const router = useRouter();
-
   const { totalItems } = useCart();
+
   const handleLogout = async () => {
     await authClient.signOut();
     router.refresh();

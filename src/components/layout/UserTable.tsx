@@ -3,6 +3,17 @@
 import { updateUserStatus } from "@/action/user.action";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ShieldAlert, ShieldCheck } from "lucide-react";
 
 interface User {
   id: string;
@@ -34,114 +45,120 @@ export const UserTable = ({ users }: { users: User[] }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden dark:bg-gray-900">
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden shadow-sm">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-800">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+        <Table>
+          <TableHeader className="bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
+            <TableRow className="hover:bg-transparent border-none">
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4 px-6">
                 #
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+              </TableHead>
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4">
                 Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+              </TableHead>
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4">
                 Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+              </TableHead>
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4">
                 Role
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+              </TableHead>
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4">
                 Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
+              </TableHead>
+              <TableHead className="font-semibold text-zinc-600 dark:text-zinc-300 py-4 px-6">
                 Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {users.map((user: User, index: number) => {
               const isActive = user.status === "ACTIVE" || !user.status;
               const isAdmin = user.role === "ADMIN";
               const isLoading = loadingUserId === user.id;
 
               return (
-                <tr
+                <TableRow
                   key={user.id}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="group hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 border-b border-zinc-100 dark:border-zinc-800/60 transition-colors"
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  <TableCell className="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400 font-medium">
                     {index + 1}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  </TableCell>
+                  <TableCell className="py-4 whitespace-nowrap">
+                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                       {user.name}
                     </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                  </TableCell>
+                  <TableCell className="py-4 whitespace-nowrap">
+                    <div className="text-sm text-zinc-500 dark:text-zinc-400">
                       {user.email}
                     </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  </TableCell>
+                  <TableCell className="py-4 whitespace-nowrap">
+                    <Badge
+                      variant="secondary"
+                      className={`font-semibold px-2.5 py-1 text-xs border-0 ${
                         user.role === "ADMIN"
-                          ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
+                          ? "bg-purple-500/10 text-purple-700 dark:bg-purple-500/10 dark:text-purple-400"
                           : user.role === "PROVIDER"
-                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
-                          : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                          ? "bg-blue-500/10 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400"
+                          : "bg-emerald-500/10 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400"
                       }`}
                     >
                       {user.role}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="py-4 whitespace-nowrap">
+                    <Badge
+                      variant={isActive ? "default" : "secondary"}
+                      className={`font-semibold px-2.5 py-1 text-xs border-0 ${
                         isActive
-                          ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
-                          : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                          ? "bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400"
+                          : "bg-red-500/10 text-red-700 hover:bg-red-500/20 dark:bg-red-500/10 dark:text-red-400"
                       }`}
                     >
-                      {user.status || "ACTIVE"}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    {!isAdmin && (
-                      <button
+                      {isActive ? "ACTIVE" : user.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="py-4 px-6 whitespace-nowrap text-sm font-medium">
+                    {!isAdmin ? (
+                      <Button
+                        size="sm"
+                        variant={isActive ? "outline" : "default"}
                         onClick={() =>
                           handleStatusChange(user.id, user.status || "ACTIVE")
                         }
                         disabled={isLoading}
-                        className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                        className={`h-8 px-3 rounded-lg text-xs font-semibold shadow-none transition-all ${
                           isActive
-                            ? "bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
-                            : "bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50"
-                        } ${
-                          isLoading
-                            ? "opacity-50 cursor-not-allowed"
-                            : "cursor-pointer"
+                            ? "border-red-200 hover:border-red-300 bg-red-50/50 hover:bg-red-100 text-red-600 dark:border-red-900/30 dark:bg-red-500/10 dark:hover:bg-red-500/20 dark:text-red-400"
+                            : "bg-emerald-50 text-emerald-600 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:hover:bg-emerald-950/50 dark:border-emerald-900/50"
                         }`}
                       >
+                        {isLoading ? (
+                          <div className="animate-spin rounded-full h-3.5 w-3.5 border-b-2 border-current mr-1.5"></div>
+                        ) : isActive ? (
+                          <ShieldAlert className="w-3.5 h-3.5 mr-1.5" />
+                        ) : (
+                          <ShieldCheck className="w-3.5 h-3.5 mr-1.5" />
+                        )}
                         {isLoading
                           ? "Updating..."
                           : isActive
                           ? "Suspend"
                           : "Activate"}
-                      </button>
-                    )}
-                    {isAdmin && (
-                      <span className="text-xs text-gray-400 dark:text-gray-500">
-                        Admin (protected)
+                      </Button>
+                    ) : (
+                      <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-lg border border-transparent">
+                        Admin (Protected)
                       </span>
                     )}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

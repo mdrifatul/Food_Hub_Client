@@ -108,7 +108,7 @@ export default function PartnerSection() {
                  <div className="flex items-center justify-between mb-5">
                     <div>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Today's Sales</p>
-                      <p className="text-2xl font-black text-white tracking-tight">৳ 18,450</p>
+                      <p className="text-2xl font-black text-white tracking-tight">$ 18,450</p>
                     </div>
                     <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center border border-emerald-500/20 shadow-inner">
                        <TrendingUp className="text-emerald-400 w-6 h-6" />

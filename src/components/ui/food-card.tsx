@@ -80,7 +80,7 @@ export function FoodCard({ meal }: { meal: MealPost }) {
               Price
             </span>
             <span className="text-2xl font-black text-foreground truncate">
-              ৳ {price.toLocaleString()}
+              ${price.toLocaleString()}
             </span>
           </div>
 
