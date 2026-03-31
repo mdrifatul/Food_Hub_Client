@@ -1,6 +1,5 @@
 "use client";
 
-
 import { createCategory } from "@/action/category.action";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,9 +50,9 @@ export function CreateCategoryForm() {
         }
 
         toast.success("Category created successfully!", { id: toastId });
-        
+
         form.reset();
-        
+
         router.refresh();
       } catch (err) {
         toast.error("Something went wrong, please try again.", { id: toastId });
@@ -62,10 +61,10 @@ export function CreateCategoryForm() {
   });
 
   return (
-    <Card>
+    <Card className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl shadow-lg">
       <CardHeader>
-        <CardTitle>Add New Category</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-foreground">Add New Category</CardTitle>
+        <CardDescription className="text-muted-foreground">
           Create a new category for your meals
         </CardDescription>
       </CardHeader>
@@ -78,7 +77,6 @@ export function CreateCategoryForm() {
           }}
         >
           <FieldGroup>
-
             <form.Field
               name="name"
               children={(field) => {
@@ -87,15 +85,14 @@ export function CreateCategoryForm() {
 
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
-                      Category Name
-                    </FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Category Name</FieldLabel>
                     <Input
                       type="text"
                       id={field.name}
                       name={field.name}
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
+                      className="bg-white dark:bg-zinc-800/50"
                       placeholder="e.g., Italian, Chinese, Vegan"
                     />
                     {isInvalid && (
@@ -105,7 +102,6 @@ export function CreateCategoryForm() {
                 );
               }}
             />
-
           </FieldGroup>
         </form>
       </CardContent>

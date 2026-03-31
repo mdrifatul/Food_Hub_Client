@@ -66,13 +66,13 @@ export function ReviewDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 shadow-2xl rounded-2xl p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-md bg-white dark:bg-zinc-950/95 border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl rounded-2xl p-0 overflow-hidden backdrop-blur-xl">
         <div className="bg-linear-to-r from-orange-500/10 to-transparent p-6 pb-0">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <DialogTitle className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
               Write a Review
             </DialogTitle>
-            <DialogDescription className="text-gray-500 dark:text-gray-400">
+            <DialogDescription className="text-zinc-500 dark:text-zinc-400">
               Share your experience with this meal
             </DialogDescription>
           </DialogHeader>
@@ -98,7 +98,7 @@ export function ReviewDialog({
             children={(field) => (
               <div className="space-y-3">
                 <Label className="text-base font-semibold">Rating</Label>
-                <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl w-fit">
+                <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 p-3 rounded-xl w-fit">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       key={star}
@@ -112,7 +112,7 @@ export function ReviewDialog({
                         className={`w-8 h-8 ${
                           star <= (hoveredRating || field.state.value)
                             ? "fill-orange-500 text-orange-500"
-                            : "text-gray-300 dark:text-gray-600"
+                            : "text-zinc-300 dark:text-zinc-600"
                         }`}
                       />
                     </button>
@@ -148,7 +148,7 @@ export function ReviewDialog({
                   <Label htmlFor="comment" className="text-base font-semibold">
                     Comment
                   </Label>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
                     {field.state.value.length} characters
                   </span>
                 </div>
@@ -159,7 +159,7 @@ export function ReviewDialog({
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Share your thoughts about this meal..."
                   rows={4}
-                  className="resize-none bg-gray-50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-800 focus:border-orange-500/50 focus:ring-orange-500/20 rounded-xl p-4 transition-all"
+                  className="resize-none bg-zinc-50 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800 focus-visible:ring-orange-500 focus-visible:shadow-orange-500/20 rounded-xl p-4 transition-all"
                 />
                 {field.state.meta.errors && (
                   <p className="text-sm text-red-500 font-medium">
@@ -176,7 +176,7 @@ export function ReviewDialog({
               variant="outline"
               onClick={() => onOpenChange(false)}
               disabled={isLoading}
-              className="rounded-xl border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+              className="rounded-xl border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 mr-2"
             >
               Cancel
             </Button>

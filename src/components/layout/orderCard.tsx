@@ -24,8 +24,8 @@ const getStatusConfig = (status: string) => {
       return {
         icon: Clock,
         color: "text-muted-foreground",
-        bg: "bg-muted",
-        border: "border-border",
+        bg: "bg-zinc-100 dark:bg-zinc-800",
+        border: "border-zinc-200 dark:border-zinc-700",
       };
     case "processing":
     case "accepted":
@@ -55,8 +55,8 @@ const getStatusConfig = (status: string) => {
       return {
         icon: Package,
         color: "text-muted-foreground",
-        bg: "bg-muted",
-        border: "border-border",
+        bg: "bg-zinc-100 dark:bg-zinc-800",
+        border: "border-zinc-200 dark:border-zinc-700",
       };
   }
 };
@@ -80,9 +80,9 @@ export function OrderCard({ order }: OrderCardProps) {
 
   return (
     <>
-      <Card className="w-full overflow-hidden p-0 sm:p-0 py-0 gap-0 border shadow-none transition-all">
+      <Card className="w-full overflow-hidden p-0 sm:p-0 py-0 gap-0 border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 shadow-none transition-all">
         {/* Header Summary */}
-        <div className="bg-muted/30 p-4 sm:p-5 border-b flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-zinc-50/80 dark:bg-zinc-900/40 p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2">
               <Receipt className="w-4 h-4 text-muted-foreground" />
@@ -131,7 +131,7 @@ export function OrderCard({ order }: OrderCardProps) {
               {order.items.map((item: any, idx: number) => (
                 <div
                   key={idx}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg border bg-muted/40 hover:bg-muted/50 transition-colors gap-3"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/30 hover:bg-zinc-50/80 dark:hover:bg-zinc-900/50 transition-colors gap-3"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800/50 border flex items-center justify-center shrink-0">
@@ -155,7 +155,7 @@ export function OrderCard({ order }: OrderCardProps) {
                     variant="outline"
                     size="sm"
                     onClick={() => handleReviewClick(item.mealId)}
-                    className="w-full sm:w-auto h-8 text-xs font-medium bg-background hover:bg-muted"
+                    className="w-full sm:w-auto h-8 text-xs font-medium bg-white dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border-zinc-200 dark:border-zinc-700"
                   >
                     <Star className="w-3.5 h-3.5 mr-1.5 text-muted-foreground" />
                     Leave Review

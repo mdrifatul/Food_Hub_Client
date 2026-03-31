@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { useCart } from "@/lib/user-cart";
+import { useCart } from "@/context/CartContext";
 import {
   ArrowRight,
   ChevronLeft,
