@@ -17,6 +17,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { useForm } from "@tanstack/react-form";
@@ -36,11 +37,10 @@ export function LoginForm({
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    const data = await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://foodhub-client-nu.vercel.app",
+      callbackURL: env.NEXT_PUBLIC_APP_URL,
     });
-    console.log(data);
   };
 
   const form = useForm({
@@ -74,7 +74,9 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-zinc-800 rounded-2xl shadow-lg">
         <CardHeader>
-          <CardTitle className="text-foreground">Login to your account</CardTitle>
+          <CardTitle className="text-foreground">
+            Login to your account
+          </CardTitle>
           <CardDescription className="text-muted-foreground">
             Enter your email below to login to your account
           </CardDescription>
@@ -157,7 +159,10 @@ export function LoginForm({
             Continue with Google
           </Button>
           <FieldDescription className="text-center text-muted-foreground">
-            Don&apos;t have an account? <a href="/register" className="text-orange-500 hover:underline">Register</a>
+            Don&apos;t have an account?{" "}
+            <a href="/register" className="text-orange-500 hover:underline">
+              Register
+            </a>
           </FieldDescription>
         </CardFooter>
       </Card>
