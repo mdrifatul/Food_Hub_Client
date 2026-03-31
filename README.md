@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FoodHub
 
-## Getting Started
+> A modern, elegant web platform for food ordering and delivery management.
 
-First, run the development server:
+FoodHub is a comprehensive web application built with Next.js that connects users with food providers. It features a complete ecosystem with distinct experiences for customers, food providers, and administrators, all wrapped in a premium, highly responsive user interface with full dark mode support.
+
+## 🔗 Live URLs
+
+- **Live Application**: [https://foodhub-client-nu.vercel.app]
+- **Live Backend**: [https://foodhub-server-gilt.vercel.app]
+
+- **Frontend Repository**: [https://github.com/mdrifatul/Food_Hub_Client]
+- **Backend Repository**: [https://github.com/mdrifatul/Food_Hub_Server]
+
+## ✨ Features
+
+- **Multi-Role Authentication**: Secure login and registration with distinct roles for Users, Providers, and Admins via Better Auth.
+- **Dynamic Dashboards**: Dedicated routing and personalized dashboards for different user types.
+- **Provider Management**: Food providers can manage their meal offerings and track incoming orders.
+- **Admin Controls**: Comprehensive admin interface to manage categories, monitor users, and oversee platform activity.
+- **Seamless Ordering**: Intuitive cart and checkout process for users to browse and order meals.
+- **Premium UI/UX**:
+  - Fluid animations powered by Framer Motion.
+  - Consistent design system using Shadcn UI principles and Radix Primitives.
+  - Seamless Light/Dark theme switching.
+- **Performance Optimized**: Built on Next.js 16 App Router and React 19 for maximum performance and SEO.
+
+## 🛠️ Technologies Used
+
+### Core
+
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **Library:** [React 19](https://react.dev/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+
+### Styling & UI
+
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+### Form Handling & Validation
+
+- **Forms:** [@tanstack/react-form](https://tanstack.com/form/latest)
+- **Validation:** [Zod](https://zod.dev/)
+
+### Authentication
+
+- **Auth:** [Better Auth](https://better-auth.com/)
+
+## 🚀 Setup Instructions
+
+Follow these simple steps to get the project up and running on your local machine.
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- `pnpm` (recommended), `npm`, or `yarn`
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/foodhub_client.git
+cd foodhub_client
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Using `pnpm` (recommended as per project lockfile):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+### 3. Environment Setup
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env` file in the root directory and copy the contents from `.env.example`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.example .env
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Update the environment variables in the `.env` file with your actual configuration details (like backend API URLs and Authentication secrets).
 
-## Deploy on Vercel
+### 4. Run the development server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page if you want to contribute.
