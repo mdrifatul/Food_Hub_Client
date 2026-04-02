@@ -43,7 +43,7 @@ import { authClient } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "./../../layout/ModeToggle";
 
 interface MenuItem {
   title: string;

@@ -1,5 +1,5 @@
 import Footer from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { Navbar } from "@/components/modules/homepage/Navbar";
 import { userService } from "@/services/user.service";
 
 export default async function HomeLayout({

@@ -7,6 +7,8 @@ import {
   ArrowRight,
   ChevronLeft,
   CreditCard,
+  Minus,
+  Plus,
   ShieldCheck,
   ShoppingBag,
   Trash2,
@@ -16,7 +18,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function CartPage() {
-  const { items, removeItem, totalPrice } = useCart();
+  const { items, removeItem, totalPrice, updateQuantity } = useCart();
 
   useEffect(() => {
     document.title = "Shopping Cart | FoodHub";
@@ -114,12 +116,32 @@ export default function CartPage() {
                       <h3 className="font-semibold text-lg lg:text-xl text-foreground leading-tight mb-1 line-clamp-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Quantity:{" "}
-                        <span className="font-medium text-foreground">
+                      <div className="flex items-center gap-2 mt-3">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          disabled={item.quantity <= 1}
+                          className="h-7 w-7 rounded-lg border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </Button>
+                        <span className="w-8 text-center font-semibold text-foreground">
                           {item.quantity}
                         </span>
-                      </p>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="h-7 w-7 rounded-lg border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </Button>
+                      </div>
                     </div>
                     <p className="font-semibold text-lg lg:text-xl text-foreground shrink-0 mt-0.5">
                       ${(item.price * item.quantity).toFixed(2)}
@@ -178,7 +200,10 @@ export default function CartPage() {
               asChild
               className="w-full h-12 rounded-xl bg-linear-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-md shadow-orange-500/20 dark:shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 dark:hover:shadow-orange-500/30 hover:-translate-y-0.5 font-semibold text-base transition-all duration-300 mt-4 group border-0"
             >
-              <Link href="/order" className="flex items-center justify-center">
+              <Link
+                href="/checkout"
+                className="flex items-center justify-center"
+              >
                 Proceed to Checkout
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>

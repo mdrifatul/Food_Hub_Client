@@ -17,7 +17,6 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
@@ -36,7 +35,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: env.NEXT_PUBLIC_APP_URL,
+      callbackURL: "https://foodhub-client-nu.vercel.app",
     });
   };
 

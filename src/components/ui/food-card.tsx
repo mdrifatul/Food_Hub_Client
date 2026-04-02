@@ -49,7 +49,7 @@ export function FoodCard({ meal }: { meal: MealPost }) {
         {/* Availability badge */}
         {isAvailable === false && (
           <div className="absolute top-3 right-3 bg-red-500/95 backdrop-blur-xl px-3 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase text-white shadow-lg border border-red-400/20">
-            Sold Out
+            Unavailable
           </div>
         )}
       </div>

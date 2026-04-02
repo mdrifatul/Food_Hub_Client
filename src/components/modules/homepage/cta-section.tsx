@@ -1,8 +1,8 @@
 // components/modules/homepage/cta-section.tsx
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function CTASection() {
   return (
@@ -18,7 +18,10 @@ export default function CTASection() {
           <div className="absolute bottom-0 left-0 translate-y-1/3 w-64 h-64 bg-orange-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
           {/* Core Content */}
-          <ScrollReveal direction="up" className="relative z-10 max-w-3xl mx-auto space-y-8">
+          <ScrollReveal
+            direction="up"
+            className="relative z-10 max-w-3xl mx-auto space-y-8"
+          >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
               Ready to satisfy your{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-500">
@@ -37,7 +40,7 @@ export default function CTASection() {
                 className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-orange-500/25 transition-transform active:scale-95"
                 asChild
               >
-                <Link href="/order">
+                <Link href="/">
                   Order Now <ShoppingBag className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
