@@ -17,14 +17,10 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function OrderPage() {
-  useEffect(() => {
-    document.title = "Your Orders | FoodHub";
-  }, []);
-
   const { items, totalPrice, clearCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
 

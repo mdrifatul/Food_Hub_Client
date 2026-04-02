@@ -33,10 +33,11 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    await authClient.signIn.social({
+    const Googleuser = await authClient.signIn.social({
       provider: "google",
       callbackURL: "https://foodhub-client-nu.vercel.app",
     });
+    console.log(Googleuser);
   };
 
   const form = useForm({

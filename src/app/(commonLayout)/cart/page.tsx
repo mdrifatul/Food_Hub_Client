@@ -15,14 +15,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function CartPage() {
   const { items, removeItem, totalPrice, updateQuantity } = useCart();
-
-  useEffect(() => {
-    document.title = "Shopping Cart | FoodHub";
-  }, []);
 
   // EMPTY STATE
   if (items.length === 0) {
