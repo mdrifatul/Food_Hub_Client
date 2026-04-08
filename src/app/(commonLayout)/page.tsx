@@ -5,6 +5,8 @@ import MealsSection from "@/components/modules/homepage/meals-section";
 import PartnerSection from "@/components/modules/homepage/partnersection";
 import WhyChooseSection from "@/components/modules/homepage/whychooseus";
 
+import FAQSection from "@/components/modules/homepage/faq-section";
+
 export interface MealsSectionProps {
   searchParams?: {
     cuisine?: string;
@@ -21,6 +23,7 @@ export default async function Home({ searchParams }: MealsSectionProps) {
       <MealsSection searchParams={resolvedParams} />
       <HowItWorksSection />
       <WhyChooseSection />
+      <FAQSection />
       <PartnerSection />
       <CTASection />
     </div>

@@ -85,7 +85,11 @@ const Navbar = ({
     alt: "logo",
     title: "Food Hub",
   },
-  menu = [{ title: "Home", url: "/" }],
+  menu = [
+    { title: "Home", url: "/" },
+    { title: "About Us", url: "/about" },
+    { title: "Contact", url: "/contact" },
+  ],
   auth = {
     login: { title: "Login", url: "/login" },
     signup: { title: "Register", url: "/register" },
