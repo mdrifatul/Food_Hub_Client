@@ -52,14 +52,6 @@ export default function Footer() {
                     Browse Meals
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/providers"
-                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Restaurants
-                  </Link>
-                </li>
               </ul>
             </div>
 
@@ -84,22 +76,6 @@ export default function Footer() {
                     Contact
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/register?role=provider"
-                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Partner With Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/provider/dashboard"
-                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
               </ul>
             </div>
 
@@ -114,22 +90,6 @@ export default function Footer() {
                     className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
                   >
                     Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/terms"
-                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/cookies"
-                    className="text-muted-foreground hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    Cookie Policy
                   </Link>
                 </li>
               </ul>

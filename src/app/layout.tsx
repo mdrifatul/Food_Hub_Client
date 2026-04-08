@@ -1,7 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 import { Providers } from "./provider/providers";
 
+export const metadata: Metadata = {
+  title: "FoodHub",
+  icons: {
+    icon: "/logo.png",
+  },
+};
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,9 +26,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <head>
-        <title>FoodHub</title>
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
