@@ -13,6 +13,7 @@ export interface MealsSectionProps {
     dietaryPreferences?: string;
     price?: string;
   };
+  limit?: number;
 }
 export default async function Home({ searchParams }: MealsSectionProps) {
   const resolvedParams = await searchParams;
@@ -20,7 +21,7 @@ export default async function Home({ searchParams }: MealsSectionProps) {
   return (
     <div>
       <HeroSection />
-      <MealsSection searchParams={resolvedParams} />
+      <MealsSection searchParams={resolvedParams} limit={8} />
       <HowItWorksSection />
       <WhyChooseSection />
       <FAQSection />
