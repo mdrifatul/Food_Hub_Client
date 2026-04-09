@@ -1,8 +1,8 @@
+import ChatKitWidget from "@/components/chatkit/ChatKitWidget";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import type { Metadata } from "next";
 import { Providers } from "./provider/providers";
-
 export const metadata: Metadata = {
   title: "FoodHub",
   icons: {
@@ -29,7 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <ChatKitWidget />
+        </Providers>
       </body>
     </html>
   );

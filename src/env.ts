@@ -7,6 +7,8 @@ export const env = createEnv({
     FRONTEND_URL: z.url(),
     API_URL: z.url(),
     AUTH_URL: z.url(),
+    OPENAI_API_KEY: z.string().min(1),
+    CHATKIT_WORKFLOW_ID: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
@@ -18,6 +20,8 @@ export const env = createEnv({
     FRONTEND_URL: process.env.FRONTEND_URL,
     API_URL: process.env.API_URL,
     AUTH_URL: process.env.AUTH_URL,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    CHATKIT_WORKFLOW_ID: process.env.CHATKIT_WORKFLOW_ID,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   },

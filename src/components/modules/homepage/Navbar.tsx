@@ -86,10 +86,10 @@ const Navbar = ({
     title: "Food Hub",
   },
   menu = [
-    { title: "Home", url: "/" },
     { title: "Meals", url: "/meals" },
     { title: "About Us", url: "/about" },
     { title: "Contact", url: "/contact" },
+    { title: "Policy", url: "/privacy" },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
